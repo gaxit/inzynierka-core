@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 @Entity(name = "address")
 public class Address {
@@ -11,14 +12,19 @@ public class Address {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	
+	@NotNull
 	private String province;
 	
+	@NotNull
 	private String town;
 	
+	@NotNull
 	private String postalCode;
 	
+	@NotNull
 	private String street;
 	
+	@NotNull
 	private int houseNo;
 	
 	private int apartmentNo;

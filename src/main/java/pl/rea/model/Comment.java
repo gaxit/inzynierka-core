@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
 @Entity(name="comment")
 public class Comment {
@@ -12,9 +13,11 @@ public class Comment {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	
+	@NotNull
 	private String comment;
 	
 	@OneToOne
+	@NotNull
 	private User author;
 
 	public int getId() {

@@ -1,6 +1,5 @@
 package pl.rea.model;
 
-import java.awt.Image;
 import java.util.Date;
 import java.util.List;
 
@@ -10,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
 @Entity(name = "offer")
 public class Offer {
@@ -17,42 +17,49 @@ public class Offer {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	
+	@NotNull
 	private Date creationDate;
 	
+	@NotNull
 	private Date finishDate;
 	
 	@OneToOne
+	@NotNull
 	private Status status;
 	
 	@OneToOne
+	@NotNull
 	private Address address;
 	
 	@OneToOne
+	@NotNull
 	private EstateType estateType;
 	
 	@OneToOne
+	@NotNull
 	private TransactionType transactionType;
 	
 	@OneToMany
 	private List<Images> images;
 	
 	@OneToMany
-	private List<Offer> favourites;
-	
-	@OneToMany
 	private List<Comment> comments;
 	
+	@NotNull
 	private boolean garage;
 	
 	private int floor;
 	
+	@NotNull
 	private int area;
 	
+	@NotNull
 	private int price;
 	
 	private String description;
 	
 	@OneToOne
+	@NotNull
 	private User owner;
 
 	public int getId() {
@@ -109,14 +116,6 @@ public class Offer {
 
 	public void setTransactionType(TransactionType transactionType) {
 		this.transactionType = transactionType;
-	}
-
-	public List<Offer> getFavourites() {
-		return favourites;
-	}
-
-	public void setFavourites(List<Offer> favourites) {
-		this.favourites = favourites;
 	}
 
 	public List<Comment> getComments() {
