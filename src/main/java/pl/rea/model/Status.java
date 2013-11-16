@@ -5,13 +5,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity(name = "estatetype")
-public class EstateType {
+@Entity(name = "status")
+public class Status {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	
-	private String estateType;
+	private String status;
 
 	public int getId() {
 		return id;
@@ -21,12 +21,12 @@ public class EstateType {
 		this.id = id;
 	}
 
-	public String getEstateType() {
-		return estateType;
+	public String getStatus() {
+		return status;
 	}
 
-	public void setEstateType(String estateType) {
-		this.estateType = estateType;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }

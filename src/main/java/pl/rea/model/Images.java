@@ -5,13 +5,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity(name = "estatetype")
-public class EstateType {
+@Entity(name="images")
+public class Images {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	
-	private String estateType;
+	private byte[] image;
 
 	public int getId() {
 		return id;
@@ -21,12 +21,12 @@ public class EstateType {
 		this.id = id;
 	}
 
-	public String getEstateType() {
-		return estateType;
+	public byte[] getImage() {
+		return image;
 	}
 
-	public void setEstateType(String estateType) {
-		this.estateType = estateType;
+	public void setImage(byte[] image) {
+		this.image = image;
 	}
 
 }

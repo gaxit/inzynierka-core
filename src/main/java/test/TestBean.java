@@ -7,21 +7,23 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import pl.rea.hibernate.HibernateUtil;
+import pl.rea.model.Address;
+import pl.rea.model.Status;
 
 @ManagedBean(name="testBean")
 public class TestBean {
 	public void test(){
 		System.out.println("Trollllll");
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-		Test test = new Test();
-		test.setId(5);
 		Session session = sessionFactory.openSession();
-		session.close();
-//		Transaction tx = session.beginTransaction();
-//		session.save(test);
-//		sessionFactory.getCurrentSession();
-//		tx.commit();
 //		session.close();
+		Transaction tx = session.beginTransaction();
+		Address address = new Address();
+		Status status = new Status();
+		status.setStatus("trol");
+//		session.save(status);
+		tx.commit();
+		session.close();
 	}
 
 }

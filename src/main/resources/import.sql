@@ -1,0 +1,9 @@
+INSERT INTO estatetype (id, estatetype) VALUES (1, 'MIESZKANIE');
+INSERT INTO estatetype (id, estatetype) VALUES (2, 'DOM');
+INSERT INTO estatetype (id, estatetype) VALUES (3, 'DZIAŁKA');
+INSERT INTO role (id, role) VALUES (1, 'ADMIN');
+INSERT INTO role (id, role) VALUES (2, 'USER');
+INSERT INTO status (id, status) VALUES (1, 'ARCHIVED');
+INSERT INTO status (id, status) VALUES (2, 'ACTIVE');
+INSERT INTO transactiontype (id, transactiontype) VALUES (1, 'WYNAJEM');
+INSERT INTO transactiontype (id, transactiontype) VALUES (2, 'SPRZEDAŻ');
