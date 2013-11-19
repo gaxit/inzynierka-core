@@ -10,10 +10,7 @@ import javax.validation.constraints.NotNull;
 public class Address {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
-	
-	@NotNull
-	private String province;
+	private Long id;
 	
 	@NotNull
 	private String town;
@@ -29,20 +26,12 @@ public class Address {
 	
 	private int apartmentNo;
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getProvince() {
-		return province;
-	}
-
-	public void setProvince(String province) {
-		this.province = province;
 	}
 
 	public String getTown() {

@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 public class Comment {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	private Long id;
 	
 	@NotNull
 	private String comment;
@@ -20,11 +20,11 @@ public class Comment {
 	@NotNull
 	private User author;
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
