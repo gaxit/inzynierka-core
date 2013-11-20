@@ -43,7 +43,7 @@ public class User {
 	
 	@OneToOne
 	@NotNull
-	private Role role;
+	private RoleDao role;
 	
 	@OneToMany
 	private List<Offer> favourites;
@@ -112,11 +112,11 @@ public class User {
 		this.address = address;
 	}
 
-	public Role getRole() {
+	public RoleDao getRole() {
 		return role;
 	}
 
-	public void setRole(Role role) {
+	public void setRole(RoleDao role) {
 		this.role = role;
 	}
 

@@ -2,48 +2,25 @@ package test;
 
 import javax.faces.bean.ManagedBean;
 
-import java.util.List;  //test
-
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.SharedSessionContract;
-import org.hibernate.Transaction;
-
-import pl.rea.hibernate.HibernateUtil;
+import java.util.List;
 
 
-import pl.rea.model.Address;
-import pl.rea.model.EstateType;
-import pl.rea.model.Offer;
-
-
-
+import pl.rea.dao.RoleDao;
 import pl.rea.model.Role;
-import pl.rea.model.Status;
-import pl.rea.model.User;
 
-@ManagedBean(name="testBean")
+@ManagedBean(name = "testBean")
 public class TestBean {
 
-
-	
-	public void test(){
-		  TestDao dao = new TestDao();
-		  Role role1 = new Role();
-		  role1.setRole("Trol");
-		  dao.insertRole(role1);
-		  List<Role> role = dao.getRoles();
-		  for (int i=0;i<role.size();i++){
-		   System.out.println(role.get(i).getRole());
-		  }
-		  Role role2 = new Role();
-		  role2.setRole("Dupa");
-		  dao.insertRole(role2);
-		  role = dao.getRoles();
-		  for (int i=0;i<role.size();i++){
-		   System.out.println(role.get(i).getRole());
-		  }
-		 }
+	public void test() {
+		RoleDao dao = new RoleDao();
+		List<Role> role = dao.getRoleList();
+		for (int i = 0; i < role.size(); i++) {
+			System.out.println(role.get(i).getRole());
+		}
+		
+		System.out.println("Role by id: " + dao.getRoleById((long)1).getRole());
+		
+		System.out.println("Role id found by name: " + dao.getRoleByName("ADMIN").getId());
+	}
 
 }
