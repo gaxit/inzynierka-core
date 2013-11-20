@@ -1,3 +1,4 @@
+
 INSERT INTO estatetype (id, estatetype) VALUES (1, 'MIESZKANIE');
 INSERT INTO estatetype (id, estatetype) VALUES (2, 'DOM');
 INSERT INTO estatetype (id, estatetype) VALUES (3, 'DZIAŁKA');
@@ -13,3 +14,12 @@ INSERT INTO userek (id,email,login,name,password,phonenumber,address_id,role_id)
 INSERT INTO userek (id,email,login,name,password,phonenumber,address_id,role_id) VALUES (43,'email2','test2','Testowy2','test','2345',3,2);
 --INSERT INTO offer_offer (id, favorites_id) VALUES (42,42);
 --INSERT INTO offer_offer (id, favorites_id) VALUES (43,43);
+INSERT INTO estatetype (id, estatetype) VALUES (1, 'Mieszkanie');
+INSERT INTO estatetype (id, estatetype) VALUES (2, 'Dom');
+INSERT INTO estatetype (id, estatetype) VALUES (3, 'Dzialka');
+INSERT INTO role (id, role) VALUES (3, 'Administrator');
+INSERT INTO role (id, role) VALUES (2, 'Uzytkownik');
+INSERT INTO status (id, status) VALUES (1, 'Zarchiwizowana');
+INSERT INTO status (id, status) VALUES (2, 'Aktywna');
+INSERT INTO transactiontype (id, transactiontype) VALUES (1, 'Wynajem');
+INSERT INTO transactiontype (id, transactiontype) VALUES (2, 'Sprzedaz');

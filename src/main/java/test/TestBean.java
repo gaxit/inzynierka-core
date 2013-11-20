@@ -11,9 +11,12 @@ import org.hibernate.SharedSessionContract;
 import org.hibernate.Transaction;
 
 import pl.rea.hibernate.HibernateUtil;
+
 import pl.rea.model.Address;
 import pl.rea.model.EstateType;
 import pl.rea.model.Offer;
+
+
 import pl.rea.model.Role;
 import pl.rea.model.Status;
 import pl.rea.model.User;
@@ -150,11 +153,10 @@ public class TestBean {
 	//end ----space for generaing actual methods
 	
 	public void test(){
-		System.out.println("Trollllll");
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
-//		session.close();
 		Transaction tx = session.beginTransaction();
+
 		Status status = new Status();
 		status.setStatus("trol");
 		
@@ -166,6 +168,15 @@ public class TestBean {
 		
 		System.out.println("trololo");
 //		session.save(status);
+
+		
+//		Role status2 = new Role();
+//		status2.setId((long) 3);
+//		status2.setRole("trołŁ");
+//		session.save(status2);
+		
+		testgetUserRoles(session);
+		
 		tx.commit();
 		session.close();
 	}
