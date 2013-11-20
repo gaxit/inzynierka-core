@@ -177,6 +177,7 @@ public class TestBean {
 		
 		testgetUserRoles(session);
 		
+		
 		tx.commit();
 		session.close();
 	}
