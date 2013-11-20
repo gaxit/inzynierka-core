@@ -45,9 +45,6 @@ public class Offer {
 	@OneToMany
 	private List<Images> images;
 	
-	@OneToMany
-	private List<Comment> comments;
-	
 	@NotNull
 	private boolean garage;
 	
@@ -60,10 +57,6 @@ public class Offer {
 	private int price;
 	
 	private String description;
-	
-	@OneToOne
-	@NotNull
-	private User owner;
 
 	public Long getId() {
 		return id;
@@ -121,14 +114,6 @@ public class Offer {
 		this.transactionType = transactionType;
 	}
 
-	public List<Comment> getComments() {
-		return comments;
-	}
-
-	public void setComments(List<Comment> comments) {
-		this.comments = comments;
-	}
-
 	public boolean isGarage() {
 		return garage;
 	}
@@ -167,14 +152,6 @@ public class Offer {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public User getOwner() {
-		return owner;
-	}
-
-	public void setOwner(User owner) {
-		this.owner = owner;
 	}
 
 	public List<Images> getImages() {

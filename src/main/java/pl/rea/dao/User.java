@@ -47,6 +47,9 @@ public class User {
 	
 	@OneToMany
 	private List<Offer> favourites;
+	
+	@OneToMany
+	private List<Offer> userOffers;
 
 	public Long getId() {
 		return id;
@@ -197,6 +200,14 @@ public class User {
 			}
 		}
 		return sessionId;
+	}
+
+	public List<Offer> getUserOffers() {
+		return userOffers;
+	}
+
+	public void setUserOffers(List<Offer> userOffers) {
+		this.userOffers = userOffers;
 	}
 
 
