@@ -36,15 +36,12 @@ public class EstateType {
 		this.estateType = estateType;
 	}
 
-	public void listEstateTypes(Session session)
+	public List<EstateType> listEstateTypes(Session session)
 	{
-		//prints ids of all existing EstateType objects 
+		//returns list of all existing EstateType objects 
 		List <EstateType> EstateTypeList;
 		EstateTypeList= ((SharedSessionContract) session).createCriteria(EstateType.class).list();
-		for (int i=0; i<EstateTypeList.size(); i++){
-			EstateType currentEstateType = EstateTypeList.get(i);
-			System.out.println(currentEstateType.getEstateType());
-		}
+		return EstateTypeList;
 	}
 	
 }
