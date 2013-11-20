@@ -163,6 +163,7 @@ public class TestBean {
 		testgetUserRoles(session);
 		System.out.println("successful test is successful");
 		
+		
 		System.out.println("trololo");
 //		session.save(status);
 		tx.commit();
