@@ -179,8 +179,8 @@ public class TestBean {
 //		session.save(status2);
 		
 		testgetUserRoles(session);
-		//createTestRole(session);
-		
+		createTestRole(session);
+		testgetUserRoles(session);
 		
 	
 		
