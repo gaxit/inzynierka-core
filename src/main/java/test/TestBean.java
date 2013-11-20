@@ -164,7 +164,7 @@ public class TestBean {
 		testgetUserRoles(session);
 		createTestRole(session);
 		testgetUserRoles(session);
-		System.out.println("successful test is successful");
+		
 		
 		
 		System.out.println("trololo");
@@ -177,7 +177,10 @@ public class TestBean {
 //		session.save(status2);
 		
 		testgetUserRoles(session);
+		//createTestRole(session);
 		
+		
+		System.out.println("successful test is successful");
 		
 		tx.commit();
 		session.close();
