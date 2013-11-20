@@ -95,8 +95,9 @@ public class TestBean {
 	public void testgetUserRoles(Session session)
 	{
 		List <Role> TestList = getUserRoles(session);
-
 		int size = TestList.size();
+		System.out.println("size: ");
+		System.out.println(size);
 		if (size>0)
 		{
 		for (int i=0; i<size; i++){
