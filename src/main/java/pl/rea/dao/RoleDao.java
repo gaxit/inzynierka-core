@@ -63,7 +63,6 @@ public class RoleDao {
 			Criteria criteria = session.createCriteria(Role.class);
 			criteria.add(Expression.eq("role",role));
 			returnRole = (Role) criteria.list().get(0);
-//			returnRole = (Role) session.get(Role.class, new Long(id));
 			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
