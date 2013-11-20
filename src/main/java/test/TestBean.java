@@ -12,9 +12,11 @@ import org.hibernate.Transaction;
 
 import pl.rea.hibernate.HibernateUtil;
 
+
 import pl.rea.model.Address;
 import pl.rea.model.EstateType;
 import pl.rea.model.Offer;
+
 
 
 import pl.rea.model.Role;
@@ -180,6 +182,16 @@ public class TestBean {
 		//createTestRole(session);
 		
 		
+	
+		
+
+		/*
+		Role status = new Role();
+		status.setId(3);
+		status.setRole("trołŁ");
+		session.save(status);
+*/		
+
 		System.out.println("successful test is successful");
 		
 		tx.commit();
