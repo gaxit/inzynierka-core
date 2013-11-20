@@ -158,6 +158,7 @@ public class TestBean {
 		Transaction tx = session.beginTransaction();
 
 		Status status = new Status();
+		
 		status.setStatus("trol");
 		
 		testgetUserRoles(session);
