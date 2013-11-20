@@ -11,5 +11,5 @@ INSERT INTO transactiontype (id, transactiontype) VALUES (2, 'SPRZEDAŻ');
 INSERT INTO address (id, apartmentno, houseno, postalcode, street, town) VALUES (3,5,5,'12345','KRAKOWSKA','KRAKOW');
 INSERT INTO userek (id,email,login,name,password,phonenumber,address_id,role_id) VALUES (42,'email1','test1','Testowy1','test','2345',3,42);
 INSERT INTO userek (id,email,login,name,password,phonenumber,address_id,role_id) VALUES (43,'email2','test2','Testowy2','test','2345',3,2);
-INSERT INTO offer_offer (id, favorites_id) VALUES (42,42);
-INSERT INTO offer_offer (id, favorites_id) VALUES (43,43);
+--INSERT INTO offer_offer (id, favorites_id) VALUES (42,42);
+--INSERT INTO offer_offer (id, favorites_id) VALUES (43,43);

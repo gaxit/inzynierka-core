@@ -41,7 +41,14 @@ public class TestBean {
 		}
 	}
 	
-	
+	public List<Role> getUserRoles(Session session)
+	{
+		//returns a list of all roles
+		List <Role> roleList;
+	    roleList= ((SharedSessionContract) session).createCriteria(Role.class).list();
+	    return roleList;
+
+	}
 	
 	public void createTestRole (Session session)
 	{
@@ -79,7 +86,7 @@ public class TestBean {
 
 	//----2) methods used to test actual methods (they have the prefix test in their names)
 	
-	/*
+	
 	public void testgetUserRoles(Session session)
 	{
 		List <Role> TestList = getUserRoles(session);
@@ -95,7 +102,7 @@ public class TestBean {
 		
 		}
 	}
-	*/
+	
 	/*
 	public void testgetUserRole(Session session, Long id)
 	{
@@ -151,7 +158,9 @@ public class TestBean {
 		Status status = new Status();
 		status.setStatus("trol");
 		
-	//	testlogin(session,"test1","test");
+		testgetUserRoles(session);
+		createTestRole(session);
+		testgetUserRoles(session);
 		
 		System.out.println("trololo");
 //		session.save(status);
