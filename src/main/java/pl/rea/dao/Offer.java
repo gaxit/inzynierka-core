@@ -36,7 +36,7 @@ public class Offer {
 	
 	@OneToOne
 	@NotNull
-	private EstateType estateType;
+	private EstateTypeDao estateType;
 	
 	@OneToOne
 	@NotNull
@@ -98,11 +98,11 @@ public class Offer {
 		this.address = address;
 	}
 
-	public EstateType getEstateType() {
+	public EstateTypeDao getEstateType() {
 		return estateType;
 	}
 
-	public void setEstateType(EstateType estateType) {
+	public void setEstateType(EstateTypeDao estateType) {
 		this.estateType = estateType;
 	}
 

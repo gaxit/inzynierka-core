@@ -13,7 +13,8 @@ import pl.rea.model.Role;
 
 public class RoleDao {
 	private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-
+	
+	
 	public List<Role> getRoleList() {
 		Session session = null;
 		Transaction tx = null;
