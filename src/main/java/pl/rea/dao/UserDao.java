@@ -119,14 +119,14 @@ public class UserDao {
 		return returnUser;
 	}
 	
-	 public void insertUser(User user){
+	 public void updateUser(User user){
 		  Session session = null;
 		  Transaction tx = null;
 		  try{  
 		   session = sessionFactory.openSession();  
 		   tx = session.beginTransaction();  
 		   
-		   session.save(user);
+		   session.saveOrUpdate(user);
 		   tx.commit(); 
 
 		  }
@@ -137,5 +137,86 @@ public class UserDao {
 		   session.close();  
 		  }
 		 }
+	 
+		public void deleteUserById(Long id) {
+			Session session = null;
+			Transaction tx = null;
+			User returnUser = null;
+			try {
+				session = sessionFactory.openSession();
+				tx = session.beginTransaction();
+				returnUser = (User) session.get(User.class, new Long(id));
+				session.delete(returnUser);
+				tx.commit();
+			} catch (Exception e) {
+				tx.rollback();
+			} finally {
+				if (session != null && session.isOpen()) {
+	                session.close();
+	            }
+			}
+		}
+		
+		public void deleteUserByName(String name) {
+			Session session = null;
+			Transaction tx = null;
+			User returnUser = null;
+			try {
+				session = sessionFactory.openSession();
+				tx = session.beginTransaction();
+				Criteria criteria = session.createCriteria(User.class);
+				criteria.add(Expression.eq("name", name));
+				List<User> userList = criteria.list();
+				if (userList.size()>0){
+					returnUser = userList.get(0);
+				}
+				else{
+					returnUser = null;
+				}
+				session.delete(returnUser);
+				tx.commit();
+			} catch (Exception e) {
+				tx.rollback();
+			} finally {
+				if (session != null && session.isOpen()) {
+	                session.close();
+	            }
+			}
+		}
+		
 	
+		public String signIn(String login, String password) {
+			Session session = null;
+			Transaction tx = null;
+			User returnUser = null;
+			String sessionId = null;
+			try {
+				session = sessionFactory.openSession();
+				tx = session.beginTransaction();
+				Criteria criteria = session.createCriteria(User.class);
+				criteria.add(Expression.eq("login", login));
+				List<User> userList = criteria.list();
+				if (userList.size()>0){
+					returnUser = userList.get(0);
+				}
+				else{
+					returnUser = null;
+				}
+				
+				if (returnUser.getPassword().equals(password))
+				{
+					sessionId=returnUser.getSessionId();
+				}
+				
+				tx.commit();
+			} catch (Exception e) {
+				tx.rollback();
+			} finally {
+				if (session != null && session.isOpen()) {
+	                session.close();
+	            }
+			}
+			return sessionId;
+		}
+		
 }
