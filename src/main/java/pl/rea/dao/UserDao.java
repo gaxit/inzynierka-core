@@ -130,6 +130,25 @@ public class UserDao {
 		  }
 		 }
 	 
+	 public void createUser(User user){
+		  Session session = null;
+		  Transaction tx = null;
+		  try{  
+		   session = sessionFactory.openSession();  
+		   tx = session.beginTransaction();  
+		   
+		   session.save(user);
+		   tx.commit(); 
+
+		  }
+		  catch(Exception e){ 
+		   tx.rollback();
+		  }
+		  finally{
+		   session.close();  
+		  }
+		 }
+	 
 		public void deleteUserById(Long id) {
 			Session session = null;
 			Transaction tx = null;

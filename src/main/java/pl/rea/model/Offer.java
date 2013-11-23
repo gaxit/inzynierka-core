@@ -147,6 +147,4 @@ public class Offer {
 		this.images = images;
 	}
 
-	
-
 }
