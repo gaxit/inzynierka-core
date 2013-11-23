@@ -11,21 +11,21 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Expression;
 
 import pl.rea.model.EstateType;
-import pl.rea.model.Role;
+import pl.rea.model.TransactionType;
 import pl.rea.utils.HibernateUtil;
 
 @Stateless
-public class EstateTypeDao {
+public class TransactionTypeDao {
 	SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 	
-	public List<EstateType> getEstateTypeList() {
+	public List<TransactionType> getTransactionTypeList() {
 		Session session = null;
 		Transaction tx = null;
-		List<EstateType> estateTypeList = null;
+		List<TransactionType> transactionTypeList = null;
 		try {
 			session = sessionFactory.openSession();
 			tx = session.beginTransaction();
-			estateTypeList = (List<EstateType>) session.createCriteria(EstateType.class).list();
+			transactionTypeList = (List<TransactionType>) session.createCriteria(TransactionType.class).list();
 			tx.commit();
 
 		} catch (Exception e) {
@@ -35,24 +35,24 @@ public class EstateTypeDao {
                 session.close();
             }
 		}
-		return estateTypeList;
+		return transactionTypeList;
 	}
 	
-	public EstateType getEstateTypeByName(String estateTypeName) {
+	public TransactionType getTransactionTypeByName(String transactionTypeName) {
 		Session session = null;
 		Transaction tx = null;
-		EstateType returnEstateType = null;
+		TransactionType returnTransactionType = null;
 		try {
 			session = sessionFactory.openSession();
 			tx = session.beginTransaction();
-			Criteria criteria = session.createCriteria(EstateType.class);
-			criteria.add(Expression.eq("estateType",estateTypeName));
-			List<EstateType> estateTypeList = criteria.list();
-			if (estateTypeList.size()>0){
-				returnEstateType = estateTypeList.get(0);
+			Criteria criteria = session.createCriteria(TransactionType.class);
+			criteria.add(Expression.eq("transactionType",transactionTypeName));
+			List<TransactionType> transactionTypeList = criteria.list();
+			if (transactionTypeList.size()>0){
+				returnTransactionType = transactionTypeList.get(0);
 			}
 			else{
-				returnEstateType = null;
+				returnTransactionType = null;
 			}
 			tx.commit();
 		} catch (Exception e) {
@@ -62,7 +62,7 @@ public class EstateTypeDao {
                 session.close();
             }
 		}
-		return returnEstateType;
+		return returnTransactionType;
 	}
-	
+
 }

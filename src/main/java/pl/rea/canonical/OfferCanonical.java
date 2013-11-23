@@ -61,7 +61,7 @@ public class OfferCanonical {
 	public void setImages(List<ImageCanonical> images) {
 		this.images = images;
 	}
-	public boolean isGarage() {
+	public boolean getGarage() {
 		return garage;
 	}
 	public void setGarage(boolean garage) {
