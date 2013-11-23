@@ -25,7 +25,7 @@ import pl.rea.model.User;
 @ManagedBean(name = "testBean")
 public class TestBean {
 
-	public void test() {
+	public String test() {
 		
 		/*
 		//RoleDao
@@ -92,7 +92,7 @@ public class TestBean {
 			System.out.println(offers.get(i).getId());
 		}
 		
-		
+		return null;
 	}
 
 }

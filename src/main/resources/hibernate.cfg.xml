@@ -20,11 +20,9 @@
    <mapping class="pl.rea.model.EstateType"/>
    <mapping class="pl.rea.model.Role"/>
    <mapping class="pl.rea.model.TransactionType"/>
-   <mapping class="pl.rea.model.Status"/>
    <mapping class="pl.rea.model.Images"/>
    <mapping class="pl.rea.model.Address"/>
    <mapping class="pl.rea.model.User"/>
-   <mapping class="pl.rea.model.Comment"/>
    <mapping class="pl.rea.model.Offer"/>
  </session-factory>
 </hibernate-configuration>

@@ -5,8 +5,6 @@ INSERT INTO estatetype (id, estatetype) VALUES (3, 'DZIAŁKA');
 INSERT INTO role (id, role) VALUES (1, 'ADMIN');
 INSERT INTO role (id, role) VALUES (2, 'USER');
 INSERT INTO role (id, role) VALUES (42, 'USER');
-INSERT INTO status (id, status) VALUES (1, 'ARCHIVED');
-INSERT INTO status (id, status) VALUES (2, 'ACTIVE');
 INSERT INTO transactiontype (id, transactiontype) VALUES (1, 'WYNAJEM');
 INSERT INTO transactiontype (id, transactiontype) VALUES (2, 'SPRZEDAŻ');
 INSERT INTO address (id, apartmentno, houseno, postalcode, street, town) VALUES (3,5,5,'12345','KRAKOWSKA','KRAKOW');
@@ -20,8 +18,6 @@ INSERT INTO userek (id,email,login,name,password,phonenumber,address_id,role_id)
 --INSERT INTO estatetype (id, estatetype) VALUES (3, 'Dzialka');
 --INSERT INTO role (id, role) VALUES (3, 'Administrator');
 --INSERT INTO role (id, role) VALUES (2, 'Uzytkownik');
---INSERT INTO status (id, status) VALUES (1, 'Zarchiwizowana');
---INSERT INTO status (id, status) VALUES (2, 'Aktywna');
 --INSERT INTO transactiontype (id, transactiontype) VALUES (1, 'Wynajem');
 --INSERT INTO transactiontype (id, transactiontype) VALUES (2, 'Sprzedaz');
 --INSERT INTO transactiontype (id, transactiontype) VALUES (2, 'Sprzedaz');
