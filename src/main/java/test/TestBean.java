@@ -1,8 +1,10 @@
 package test;
 
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 
 import java.util.List;
+
 
 
 
@@ -25,7 +27,14 @@ import pl.rea.model.User;
 @ManagedBean(name = "testBean")
 public class TestBean {
 
+	@EJB
+	private RoleDao roleDao;
+	
 	public String test() {
+		List<Role> roleList = roleDao.getRoleList();
+		for (int i=0;i<roleList.size();i++){
+			System.out.println(roleList.get(i).getRole());
+		}
 		
 		/*
 		//RoleDao
@@ -85,12 +94,12 @@ public class TestBean {
 		
 		
 		//OffereDao
-		OfferDao dao = new OfferDao();
-		List<Offer> offers = dao.getOfferList();
-		for (int i=0;i<offers.size(); i++)
-		{
-			System.out.println(offers.get(i).getId());
-		}
+//		OfferDao dao = new OfferDao();
+//		List<Offer> offers = dao.getOfferList();
+//		for (int i=0;i<offers.size(); i++)
+//		{
+//			System.out.println(offers.get(i).getId());
+//		}
 		
 		return null;
 	}

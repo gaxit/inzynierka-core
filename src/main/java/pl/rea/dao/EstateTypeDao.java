@@ -2,21 +2,16 @@ package pl.rea.dao;
 
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
+import javax.ejb.Stateless;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.SharedSessionContract;
 import org.hibernate.Transaction;
 
 import pl.rea.hibernate.HibernateUtil;
 import pl.rea.model.EstateType;
-import pl.rea.model.Role;
 
+@Stateless
 public class EstateTypeDao {
 	SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 	

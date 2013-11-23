@@ -2,6 +2,8 @@ package pl.rea.dao;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,6 +13,7 @@ import org.hibernate.criterion.Expression;
 import pl.rea.hibernate.HibernateUtil;
 import pl.rea.model.Role;
 
+@Stateless
 public class RoleDao {
 	private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 	

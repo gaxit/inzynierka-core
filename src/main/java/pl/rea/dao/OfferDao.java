@@ -1,27 +1,17 @@
 package pl.rea.dao;
 
-import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.validation.constraints.NotNull;
+import javax.ejb.Stateless;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.SharedSessionContract;
 import org.hibernate.Transaction;
 
 import pl.rea.hibernate.HibernateUtil;
 import pl.rea.model.Offer;
-import pl.rea.model.Role;
-import pl.rea.model.User;
 
-
+@Stateless
 public class OfferDao {
 	private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 	
