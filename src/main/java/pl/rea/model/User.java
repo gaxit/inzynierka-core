@@ -44,6 +44,9 @@ public class User {
 	
 	@OneToMany
 	private List<Offer> favourites;
+	
+	@OneToMany
+	private List<Offer> offers;
 
 	public Long getId() {
 		return id;
@@ -123,6 +126,14 @@ public class User {
 
 	public void setFavourites(List<Offer> favourites) {
 		this.favourites = favourites;
+	}
+
+	public List<Offer> getOffers() {
+		return offers;
+	}
+
+	public void setOffers(List<Offer> offers) {
+		this.offers = offers;
 	}
 
 }
