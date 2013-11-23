@@ -6,8 +6,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import pl.rea.hibernate.HibernateUtil;
 import pl.rea.model.Role;
+import pl.rea.utils.HibernateUtil;
 
 public class TestDao {
 

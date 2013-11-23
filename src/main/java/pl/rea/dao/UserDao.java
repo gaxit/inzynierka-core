@@ -10,8 +10,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Expression;
 
-import pl.rea.hibernate.HibernateUtil;
 import pl.rea.model.User;
+import pl.rea.utils.HibernateUtil;
 
 @Stateless
 public class UserDao {

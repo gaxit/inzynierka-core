@@ -1,4 +1,4 @@
-package pl.rea.hibernate;
+package pl.rea.utils;
  
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;

@@ -8,8 +8,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import pl.rea.hibernate.HibernateUtil;
 import pl.rea.model.EstateType;
+import pl.rea.utils.HibernateUtil;
 
 @Stateless
 public class EstateTypeDao {
