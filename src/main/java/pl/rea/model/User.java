@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
@@ -15,6 +17,7 @@ import javax.validation.constraints.NotNull;
 public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="user_id")
 	private Long id;
 	
 	@NotNull
@@ -43,9 +46,11 @@ public class User {
 	private Role role;
 	
 	@OneToMany
+	@JoinTable(name = "favourites", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "offer_id") })
 	private List<Offer> favourites;
 	
 	@OneToMany
+	@JoinTable(name = "owner_offer", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "offer_id") })
 	private List<Offer> offers;
 
 	public Long getId() {

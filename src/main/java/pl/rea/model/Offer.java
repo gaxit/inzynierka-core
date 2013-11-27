@@ -3,6 +3,7 @@ package pl.rea.model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +16,7 @@ import javax.validation.constraints.NotNull;
 public class Offer {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="offer_id")
 	private Long id;
 	
 	@NotNull

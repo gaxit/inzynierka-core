@@ -26,6 +26,7 @@ public class OfferTransform {
 	@EJB
 	ImagesTransform imageTransform;
 	
+	//nie testowane
 	public Offer offerCanonicalToOffer(OfferCanonical offerCanon){
 		Offer offer = new Offer();
 		
