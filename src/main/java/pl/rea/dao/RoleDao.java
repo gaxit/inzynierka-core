@@ -17,34 +17,27 @@ import pl.rea.utils.HibernateUtil;
 public class RoleDao {
 	private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 	
-	// ? do przeróbki, dobre wyniki
+	// ?
 	public List<Role> getRoleList() {
-		Session session = null;
-		Transaction tx = null;
 		List<Role> roleList = null;
 		try {
-			session = sessionFactory.openSession();
-			tx = session.beginTransaction();
+			Session session = sessionFactory.getCurrentSession();
+			session.getTransaction().begin();
+			
 			roleList = (List<Role>) session.createCriteria(Role.class).list();
-			tx.commit();
-
 		} catch (Exception e) {
-			tx.rollback();
-		} finally {
-			if (session != null && session.isOpen()) {
-				session.close();
-			}
+			System.out.println("RoleDao getRoleList exception: " + e.getMessage());
 		}
 		return roleList;
 	}
-
+	
+	// ?
 	public Role getRoleByName(String role) {
-		Session session = null;
-		Transaction tx = null;
 		Role returnRole = null;
 		try {
-			session = sessionFactory.openSession();
-			tx = session.beginTransaction();
+			Session session = sessionFactory.getCurrentSession();
+			session.getTransaction().begin();
+			
 			Criteria criteria = session.createCriteria(Role.class);
 			criteria.add(Expression.eq("role", role));
 			List<Role> roleList = criteria.list();
@@ -53,13 +46,8 @@ public class RoleDao {
 			} else {
 				returnRole = null;
 			}
-			tx.commit();
 		} catch (Exception e) {
-			tx.rollback();
-		} finally {
-			if (session != null && session.isOpen()) {
-				session.close();
-			}
+			System.out.println("RoleDao getRoleByName exception: " + e.getMessage());
 		}
 		return returnRole;
 	}

@@ -20,106 +20,69 @@ public class OfferDao {
 
 	// ?
 	public List<Offer> getOfferList() {
-		Session session = null;
-		Transaction tx = null;
 		List<Offer> offerList = null;
 		try {
-			session = sessionFactory.openSession();
-			tx = session.beginTransaction();
+			Session session = sessionFactory.getCurrentSession();
+			session.getTransaction().begin();
+			
 			offerList = (List<Offer>) session.createCriteria(Offer.class).list();
-			tx.commit();
-
 		} catch (Exception e) {
-			tx.rollback();
-		} finally {
-			if (session != null && session.isOpen()) {
-				session.close();
-			}
+			System.out.println("OfferDao getOfferList exception: " + e.getMessage());
 		}
 		return offerList;
 	}
 
 	// ?
 	public Offer getOfferById(Long id) {
-		Session session = null;
-		Transaction tx = null;
 		Offer returnOffer = null;
 		try {
-			session = sessionFactory.openSession();
-			tx = session.beginTransaction();
+			Session session = sessionFactory.getCurrentSession();
+			session.getTransaction().begin();
+			
 			returnOffer = (Offer) session.get(Offer.class, new Long(id));
-			tx.commit();
 		} catch (Exception e) {
-			tx.rollback();
-		} finally {
-			if (session != null && session.isOpen()) {
-				session.close();
-			}
+			System.out.println("OfferDao getOfferById exception: " + e.getMessage());
 		}
 		return returnOffer;
 	}
 	
 	// ?
 	public void updateOffer(Offer offer) {
-		Session session = null;
-		Transaction tx = null;
 		try {
-			session = sessionFactory.openSession();
-			tx = session.beginTransaction();
+			Session session = sessionFactory.getCurrentSession();
+			session.getTransaction().begin();
 
 			session.saveOrUpdate(offer);
-			tx.commit();
-
 		} catch (Exception e) {
-			tx.rollback();
-		} finally {
-			session.close();
+			System.out.println("OfferDao updateOffer exception: " + e.getMessage());
 		}
 	}
 	
 	// ?
-	public void deleteOfferById(Long id) {
-		Session session = null;
-		Transaction tx = null;
-		Offer returnOffer = null;
+	public void deleteOffer(Offer offer) {
 		try {
-			session = sessionFactory.openSession();
-			tx = session.beginTransaction();
-			returnOffer = (Offer) session.get(Offer.class, new Long(id));
-			session.delete(returnOffer);
-			tx.commit();
+			Session session = sessionFactory.getCurrentSession();
+			session.getTransaction().begin();
+			
+			session.delete(offer);
 		} catch (Exception e) {
-			tx.rollback();
-		} finally {
-			if (session != null && session.isOpen()) {
-				session.close();
-			}
+			System.out.println("OfferDao deleteOffer exception: " + e.getMessage());
 		}
 	}
 	
-	// ? do przeróbki, dobre wyniki
+	// ?
 	public String getOfferOwnerLogin(Offer offer) {
-		Session session = null;
-		Transaction tx = null;
 		String returnOwnerLogin = null;
 		try {
-			session = sessionFactory.openSession();
-			tx = session.beginTransaction();
+			Session session = sessionFactory.getCurrentSession();
+			session.getTransaction().begin();
 
 			Criteria criteria = session.createCriteria(User.class, "userek");
 			criteria.createAlias("userek.offers", "offers");
 			User user = ((List<User>) criteria.list()).get(0);
 			returnOwnerLogin = user.getLogin();
-
-			tx.commit();
 		} catch (Exception e) {
-			System.out.println("Wyjatek podczas pobierania wlasciciela: "
-					+ e.getMessage());
-			tx.rollback();
-		} finally {
-			if (session != null && session.isOpen()) {
-				session.close();
-			}
+			System.out.println("OfferDao getOfferOwnerLogin exception: " + e.getMessage());
 		}
 		return returnOwnerLogin;
 	}

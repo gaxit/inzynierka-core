@@ -18,35 +18,27 @@ import pl.rea.utils.HibernateUtil;
 public class EstateTypeDao {
 	SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 	
-	// ? do przeróbki, dobre wyniki
+	// ?
 	public List<EstateType> getEstateTypeList() {
-		Session session = null;
-		Transaction tx = null;
 		List<EstateType> estateTypeList = null;
 		try {
-			session = sessionFactory.openSession();
-			tx = session.beginTransaction();
+			Session session = sessionFactory.getCurrentSession();
+			session.getTransaction().begin();
+			
 			estateTypeList = (List<EstateType>) session.createCriteria(EstateType.class).list();
-			tx.commit();
-
 		} catch (Exception e) {
-			tx.rollback();
-		} finally {
-			if (session != null && session.isOpen()) {
-                session.close();
-            }
+			System.out.println("EstateTypeDao getEstateTypeList exception: " + e.getMessage());
 		}
 		return estateTypeList;
 	}
 	
-	// ? do przeróbki, dobre wyniki
+	// ?
 	public EstateType getEstateTypeByName(String estateTypeName) {
-		Session session = null;
-		Transaction tx = null;
 		EstateType returnEstateType = null;
 		try {
-			session = sessionFactory.openSession();
-			tx = session.beginTransaction();
+			Session session = sessionFactory.getCurrentSession();
+			session.getTransaction().begin();
+			
 			Criteria criteria = session.createCriteria(EstateType.class);
 			criteria.add(Expression.eq("estateType",estateTypeName));
 			List<EstateType> estateTypeList = criteria.list();
@@ -56,13 +48,8 @@ public class EstateTypeDao {
 			else{
 				returnEstateType = null;
 			}
-			tx.commit();
 		} catch (Exception e) {
-			tx.rollback();
-		} finally {
-			if (session != null && session.isOpen()) {
-                session.close();
-            }
+			System.out.println("EstateTypeDao getEstateTypeByName exception: " + e.getMessage());
 		}
 		return returnEstateType;
 	}

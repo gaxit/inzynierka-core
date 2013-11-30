@@ -18,55 +18,41 @@ public class UserDao {
 
 	private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 	
-	// ? do przeróbki, dobre wyniki
+	// ?
 	public List<User> getUserList() {
-		Session session = null;
-		Transaction tx = null;
 		List<User> userList = null;
 		try {
-			session = sessionFactory.openSession();
-			tx = session.beginTransaction();
+			Session session = sessionFactory.getCurrentSession();
+			session.getTransaction().begin();
+			
 			userList = (List<User>) session.createCriteria(User.class).list();
-			tx.commit();
-
 		} catch (Exception e) {
-			tx.rollback();
-		} finally {
-			if (session != null && session.isOpen()) {
-				session.close();
-			}
+			System.out.println("UserDao getUserList exception: " + e.getMessage());
 		}
 		return userList;
 	}
 	
-	// ? do przeróbki, dobre wyniki
+	// ?
 	public User getUserById(Long id) {
-		Session session = null;
-		Transaction tx = null;
 		User returnUser = null;
 		try {
-			session = sessionFactory.openSession();
-			tx = session.beginTransaction();
+			Session session = sessionFactory.getCurrentSession();
+			session.getTransaction().begin();
+			
 			returnUser = (User) session.get(User.class, new Long(id));
-			tx.commit();
 		} catch (Exception e) {
-			tx.rollback();
-		} finally {
-			if (session != null && session.isOpen()) {
-				session.close();
-			}
+			System.out.println("UserDao getUserById exception: " + e.getMessage());
 		}
 		return returnUser;
 	}
 	
-	// ? do przeróbki, dobre wyniki
+	// ?
 	public User getUserByName(String name) {
-		Session session = null;
-		Transaction tx = null;
 		User returnUser = null;
 		try {
-			session = sessionFactory.openSession();
-			tx = session.beginTransaction();
+			Session session = sessionFactory.getCurrentSession();
+			session.getTransaction().begin();
+			
 			Criteria criteria = session.createCriteria(User.class);
 			criteria.add(Expression.eq("name", name));
 			List<User> userList = criteria.list();
@@ -75,25 +61,19 @@ public class UserDao {
 			} else {
 				returnUser = null;
 			}
-			tx.commit();
 		} catch (Exception e) {
-			tx.rollback();
-		} finally {
-			if (session != null && session.isOpen()) {
-				session.close();
-			}
+			System.out.println("UserDao getUserByName exception: " + e.getMessage());
 		}
 		return returnUser;
 	}
 	
-	// ? do przeróbki, dobre wyniki
+	// ?
 	public User getUserByLogin(String login) {
-		Session session = null;
-		Transaction tx = null;
 		User returnUser = null;
 		try {
-			session = sessionFactory.openSession();
-			tx = session.beginTransaction();
+			Session session = sessionFactory.getCurrentSession();
+			session.getTransaction().begin();
+			
 			Criteria criteria = session.createCriteria(User.class);
 			criteria.add(Expression.eq("login", login));
 			List<User> userList = criteria.list();
@@ -102,72 +82,45 @@ public class UserDao {
 			} else {
 				returnUser = null;
 			}
-			tx.commit();
 		} catch (Exception e) {
-			tx.rollback();
-		} finally {
-			if (session != null && session.isOpen()) {
-				session.close();
-			}
+			System.out.println("UserDao getUserByLogin exception: " + e.getMessage());
 		}
 		return returnUser;
 	}
 	
-	// ? do przeróbki, dobre wyniki
+	// ?
 	public void updateUser(User user) {
-		Session session = null;
-		Transaction tx = null;
 		try {
-			session = sessionFactory.openSession();
-			tx = session.beginTransaction();
+			Session session = sessionFactory.getCurrentSession();
+			session.getTransaction().begin();
 
 			session.saveOrUpdate(user);
-			tx.commit();
-
 		} catch (Exception e) {
-			tx.rollback();
-		} finally {
-			session.close();
+			System.out.println("UserDao updateUser exception: " + e.getMessage());
 		}
 	}
 	
-	// ? do przeróbki, dobre wyniki
-	public void createUser(User user) {
-		Session session = null;
-		Transaction tx = null;
+	// ?
+	public void saveUser(User user) {
 		try {
-			session = sessionFactory.openSession();
-			tx = session.beginTransaction();
+			Session session = sessionFactory.getCurrentSession();
+			session.getTransaction().begin();
 			
 			session.save(user);
-			
-			tx.commit();
-
 		} catch (Exception e) {
-			System.out.println("Wyjatek: " + e.getMessage());
-			tx.rollback();
-		} finally {
-			session.close();
+			System.out.println("UserDao saveUser exception: " + e.getMessage());
 		}
 	}
 	
-	// ? przerobić na deleteUser(User user)
-	public void deleteUserById(Long id) {
-		Session session = null;
-		Transaction tx = null;
-		User returnUser = null;
+	// ?
+	public void deleteUser(User user) {
 		try {
-			session = sessionFactory.openSession();
-			tx = session.beginTransaction();
-			returnUser = (User) session.get(User.class, new Long(id));
-			session.delete(returnUser);
-			tx.commit();
+			Session session = sessionFactory.getCurrentSession();
+			session.getTransaction().begin();
+			
+			session.delete(user);
 		} catch (Exception e) {
-			tx.rollback();
-		} finally {
-			if (session != null && session.isOpen()) {
-				session.close();
-			}
+			System.out.println("UserDao deleteUser exception: " + e.getMessage());
 		}
 	}
 
