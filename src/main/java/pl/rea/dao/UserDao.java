@@ -67,7 +67,7 @@ public class UserDao {
 		return returnUser;
 	}
 	
-	// ?
+	// ok
 	public User getUserByLogin(String login) {
 		User returnUser = null;
 		try {
