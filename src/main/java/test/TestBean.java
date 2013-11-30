@@ -3,7 +3,11 @@ package test;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 
+import java.util.Date;
 import java.util.List;
+
+
+
 
 
 
@@ -17,11 +21,13 @@ import java.util.List;
 import pl.rea.dao.EstateTypeDao;
 import pl.rea.dao.OfferDao;
 import pl.rea.dao.RoleDao;
+import pl.rea.dao.TransactionTypeDao;
 import pl.rea.dao.UserDao;
 import pl.rea.model.Address;
 import pl.rea.model.EstateType;
 import pl.rea.model.Offer;
 import pl.rea.model.Role;
+import pl.rea.model.TransactionType;
 import pl.rea.model.User;
 
 @ManagedBean(name = "testBean")
@@ -30,11 +36,80 @@ public class TestBean {
 	@EJB
 	private RoleDao roleDao;
 	
+	@EJB
+	private EstateTypeDao estateTypeDao;
+	
+	@EJB
+	private TransactionTypeDao transTypeDao;
+	
+	@EJB
+	private UserDao userDao;
+	
+	@EJB
+	private OfferDao offerDao;
+	
 	public String test() {
-		List<Role> roleList = roleDao.getRoleList();
-		for (int i=0;i<roleList.size();i++){
-			System.out.println(roleList.get(i).getRole());
-		}
+		EstateType domType = estateTypeDao.getEstateTypeByName("DOM");
+		System.out.println(domType.getEstateType());
+		
+		TransactionType transType = transTypeDao.getTransactionTypeByName("WYNAJEM");
+		System.out.println(transType.getTransactionType());
+		
+		Role role = roleDao.getRoleByName("ADMIN");
+		System.out.println(role.getRole());
+		
+		Address address = new Address();
+		address.setApartmentNo(10);
+		address.setHouseNo(10);
+		address.setPostalCode("33-333");
+		address.setStreet("Floriańska");
+		address.setTown("Kraków");
+		
+		User user = new User();
+		user.setAddress(address);
+		user.setEmail("trol@trol.pl");
+		user.setLogin("admin");
+		user.setName("Administrator systemu");
+		user.setPassword("haslo");
+		user.setPhoneNumber("666666666");
+		user.setRole(role);
+		
+		Offer offer1 = new Offer();
+		offer1.setAddress(address);
+		offer1.setArea(200);
+		offer1.setCreationDate(new Date());
+		offer1.setDescription("Opis");
+		offer1.setEstateType(domType);
+		offer1.setFinishDate(new Date());
+		offer1.setFloor(2);
+		offer1.setGarage(true);
+		offer1.setPrice(200000);
+		offer1.setTransactionType(transType);
+		
+		user.getOffers().add(offer1);
+		
+		System.out.println("Dodano oferte i uzytkownika w testBeanie");
+		
+		userDao.createUser(user);
+		
+		System.out.println("Zapisano uzytkownika");
+		
+		System.out.println("Offer owner: " + offerDao.getOfferOwnerLogin(offer1));
+		
+		
+		
+		
+		
+		
+		
+		
+		
+//		List<Role> roleList = roleDao.getRoleList();
+//		for (int i=0;i<roleList.size();i++){
+//			System.out.println(roleList.get(i).getRole());
+//		}
+		
+		
 		
 		/*
 		//RoleDao

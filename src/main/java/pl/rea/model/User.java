@@ -1,7 +1,9 @@
 package pl.rea.model;
 
+import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -37,7 +39,7 @@ public class User {
 	@NotNull
 	private String email;
 	
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	@NotNull
 	private Address address;
 	
@@ -45,13 +47,28 @@ public class User {
 	@NotNull
 	private Role role;
 	
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	@JoinTable(name = "favourites", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "offer_id") })
 	private List<Offer> favourites;
 	
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	@JoinTable(name = "owner_offer", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "offer_id") })
 	private List<Offer> offers;
+	
+	public User(){
+		this.address = null;
+		this.email = null;
+		this.favourites = new LinkedList<Offer>();
+		this.id = null;
+		this.login = null;
+		this.name = null;
+		this.offers = new LinkedList<Offer>();
+		this.password = null;
+		this.phoneNumber = null;
+		this.role = null;
+		this.sessionId = null;
+		
+	}
 
 	public Long getId() {
 		return id;

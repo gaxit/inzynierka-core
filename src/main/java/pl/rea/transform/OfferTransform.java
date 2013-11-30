@@ -5,8 +5,10 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import pl.rea.canonical.ImageCanonical;
 import pl.rea.canonical.OfferCanonical;
 import pl.rea.dao.EstateTypeDao;
+import pl.rea.dao.OfferDao;
 import pl.rea.dao.TransactionTypeDao;
 import pl.rea.model.Address;
 import pl.rea.model.EstateType;
@@ -26,23 +28,26 @@ public class OfferTransform {
 	@EJB
 	ImagesTransform imageTransform;
 	
+	@EJB
+	OfferDao offerDao;
+	
 	//nie testowane
 	public Offer offerCanonicalToOffer(OfferCanonical offerCanon){
 		Offer offer = new Offer();
 		
 		offer.setArea(offerCanon.getArea());
+		offer.setId(offerCanon.getId());
 		offer.setCreationDate(offerCanon.getCreationDate());
 		offer.setDescription(offerCanon.getDescription());
 		offer.setFinishDate(offerCanon.getFinishDate());
 		offer.setFloor(offerCanon.getFloor());
 		offer.setGarage(offerCanon.getGarage());
-		offer.setId(offerCanon.getId());
 		offer.setPrice(offerCanon.getPrice());
 		
 		Address address = new Address();
+		address.setId(offerCanon.getAddressId());
 		address.setApartmentNo(offerCanon.getApartmentNo());
 		address.setHouseNo(offerCanon.getApartmentNo());
-		address.setId(offerCanon.getAddressId());
 		address.setPostalCode(offerCanon.getPostalCode());
 		address.setStreet(offerCanon.getStreet());
 		address.setTown(offerCanon.getTown());
@@ -58,6 +63,38 @@ public class OfferTransform {
 		offer.setImages(imgList);
 		
 		return offer;
+	}
+	
+	//nie testowane
+	public OfferCanonical offerToOfferCanonical(Offer offer){
+		OfferCanonical offerCanon = new OfferCanonical();
+		
+		offerCanon.setId(offer.getId());
+		offerCanon.setArea(offer.getArea());
+		offerCanon.setCreationDate(offer.getCreationDate());
+		offerCanon.setDescription(offer.getDescription());
+		offerCanon.setFinishDate(offer.getFinishDate());
+		offerCanon.setFloor(offer.getFloor());
+		offerCanon.setGarage(offer.isGarage());
+		offerCanon.setPrice(offer.getPrice());
+		
+		offerCanon.setAddressId(offer.getAddress().getId());
+		offerCanon.setApartmentNo(offer.getAddress().getApartmentNo());
+		offerCanon.setHouseNo(offer.getAddress().getHouseNo());
+		offerCanon.setPostalCode(offer.getAddress().getPostalCode());
+		offerCanon.setStreet(offer.getAddress().getStreet());
+		offerCanon.setTown(offer.getAddress().getTown());
+		
+		offerCanon.setEstateType(offer.getEstateType().getEstateType());
+		
+		offerCanon.setTransactionType(offer.getTransactionType().getTransactionType());
+		
+		List<ImageCanonical> imgCanonList = imageTransform.imagesListToCanonicalImageList(offer.getImages());
+		offerCanon.setImages(imgCanonList);
+		
+		offerCanon.setOwner(offerDao.getOfferOwnerLogin(offer));
+		
+		return offerCanon;
 	}
 
 }

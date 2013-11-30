@@ -4,11 +4,14 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 import pl.rea.model.Offer;
+import pl.rea.model.User;
 import pl.rea.utils.HibernateUtil;
 
 @Stateless
@@ -89,6 +92,31 @@ public class OfferDao {
 	                session.close();
 	            }
 			}
+		}
+		
+		public String getOfferOwnerLogin(Offer offer){
+			Session session = null;
+			Transaction tx = null;
+			String returnOwnerLogin = null;
+			try {
+				session = sessionFactory.openSession();
+				tx = session.beginTransaction();
+				
+				Criteria criteria = session.createCriteria(User.class, "userek");
+				criteria.createAlias("userek.offers", "offers");
+				User user = ((List<User>) criteria.list()).get(0);
+				returnOwnerLogin = user.getLogin();
+				
+				tx.commit();
+			} catch (Exception e) {
+				System.out.println("Wyjatek podczas pobierania wlasciciela: " + e.getMessage());
+				tx.rollback();
+			} finally {
+				if (session != null && session.isOpen()) {
+	                session.close();
+	            }
+			}
+			return returnOwnerLogin;
 		}
 	 
 }
