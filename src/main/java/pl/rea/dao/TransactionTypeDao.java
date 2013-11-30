@@ -17,27 +17,23 @@ import pl.rea.utils.HibernateUtil;
 @Stateless
 public class TransactionTypeDao {
 	SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-	
-	public List<TransactionType> getTransactionTypeList() {
-		Session session = null;
-		Transaction tx = null;
-		List<TransactionType> transactionTypeList = null;
-		try {
-			session = sessionFactory.openSession();
-			tx = session.beginTransaction();
-			transactionTypeList = (List<TransactionType>) session.createCriteria(TransactionType.class).list();
-			tx.commit();
 
-		} catch (Exception e) {
-			tx.rollback();
-		} finally {
-			if (session != null && session.isOpen()) {
-                session.close();
-            }
+	//ok
+	public List<TransactionType> getTransactionTypeList() {
+		List<TransactionType> transactionTypeList = null;
+		try{
+			Session session = sessionFactory.getCurrentSession();
+			session.getTransaction().begin();
+			
+			transactionTypeList = (List<TransactionType>) session.createCriteria(TransactionType.class).list();
+		}
+		catch(Exception e){
+			System.out.println("get transaction Type list exception: " + e.getMessage());
 		}
 		return transactionTypeList;
 	}
-	
+
+	// ? do przeróbki, dobre wyniki
 	public TransactionType getTransactionTypeByName(String transactionTypeName) {
 		Session session = null;
 		Transaction tx = null;
@@ -46,12 +42,11 @@ public class TransactionTypeDao {
 			session = sessionFactory.openSession();
 			tx = session.beginTransaction();
 			Criteria criteria = session.createCriteria(TransactionType.class);
-			criteria.add(Expression.eq("transactionType",transactionTypeName));
+			criteria.add(Expression.eq("transactionType", transactionTypeName));
 			List<TransactionType> transactionTypeList = criteria.list();
-			if (transactionTypeList.size()>0){
+			if (transactionTypeList.size() > 0) {
 				returnTransactionType = transactionTypeList.get(0);
-			}
-			else{
+			} else {
 				returnTransactionType = null;
 			}
 			tx.commit();
@@ -59,8 +54,8 @@ public class TransactionTypeDao {
 			tx.rollback();
 		} finally {
 			if (session != null && session.isOpen()) {
-                session.close();
-            }
+				session.close();
+			}
 		}
 		return returnTransactionType;
 	}

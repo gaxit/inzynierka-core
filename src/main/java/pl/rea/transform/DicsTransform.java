@@ -1,4 +1,4 @@
-package pl.rea.canonical;
+package pl.rea.transform;
 
 import java.util.LinkedList;
 import java.util.List;

@@ -18,6 +18,7 @@ import pl.rea.utils.HibernateUtil;
 public class EstateTypeDao {
 	SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 	
+	// ? do przeróbki, dobre wyniki
 	public List<EstateType> getEstateTypeList() {
 		Session session = null;
 		Transaction tx = null;
@@ -38,6 +39,7 @@ public class EstateTypeDao {
 		return estateTypeList;
 	}
 	
+	// ? do przeróbki, dobre wyniki
 	public EstateType getEstateTypeByName(String estateTypeName) {
 		Session session = null;
 		Transaction tx = null;
