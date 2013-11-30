@@ -1,5 +1,6 @@
 package pl.rea.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,6 +14,7 @@ public class TransactionType {
 	private Long id;
 	
 	@NotNull
+	@Column(unique=true)
 	private String transactionType;
 
 	public String getTransactionType() {

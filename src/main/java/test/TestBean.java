@@ -19,6 +19,8 @@ import java.util.List;
 
 
 
+
+
 import pl.rea.dao.EstateTypeDao;
 import pl.rea.dao.OfferDao;
 import pl.rea.dao.RoleDao;
@@ -30,6 +32,7 @@ import pl.rea.model.Offer;
 import pl.rea.model.Role;
 import pl.rea.model.TransactionType;
 import pl.rea.model.User;
+import pl.rea.utils.LoggedUserUtils;
 import pl.rea.webservices.DicsService;
 
 @ManagedBean(name = "testBean")
@@ -54,13 +57,18 @@ public class TestBean {
 //	private DicsService dicsService;
 	private DicsService dicsService = new DicsService();
 	
+	private LoggedUserUtils loggedUserUtils = new LoggedUserUtils();
+	
 	public String test() {
 		System.out.println("Test bean start");
-		List<String> transTypeList = dicsService.getRoleList();
-		for (String stringg : transTypeList) {
-			System.out.println(stringg);
-		}
+//		List<String> transTypeList = dicsService.getRoleList();
+//		for (String stringg : transTypeList) {
+//			System.out.println(stringg);
+//		}
+//		
+//		System.out.println("System time: " + System.currentTimeMillis());
 		
+		System.out.println("Uzytkownik zalogowany?: " + loggedUserUtils.isUserLogged("login3", "sessionid1"));
 		
 		
 		return null;
