@@ -56,5 +56,11 @@ public class OfferService {
 		
 		return null;
 	}
+	
+	public OfferCanonical getOffer(Long id){
+		// pobranie informacji o jednej ofercie
+		
+		return null;
+	}
 
 }

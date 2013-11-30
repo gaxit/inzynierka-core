@@ -72,5 +72,13 @@ public class UserService {
 		// do usuwania, co Ty na to?
 		// usuniecie uzytkownika o podanym loginie
 	}
+	
+	public UserCanonical getUser(String login, String sessionId, String loginUserToGet){
+		// sprawdzenie, czy uzytkownik jest zalogowany
+		// sprawdzenie, czy zalogowany jest admin albo login i loginUserToGet sa takie same
+		// pobranie i zwrocenie uzytkownika loginUserToGet
+		
+		return null;
+	}
 
 }
