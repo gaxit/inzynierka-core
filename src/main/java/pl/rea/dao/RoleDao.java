@@ -22,7 +22,6 @@ public class RoleDao {
 		List<Role> roleList = null;
 		try {
 			Session session = sessionFactory.getCurrentSession();
-			session.getTransaction().begin();
 			
 			roleList = (List<Role>) session.createCriteria(Role.class).list();
 		} catch (Exception e) {
@@ -36,7 +35,6 @@ public class RoleDao {
 		Role returnRole = null;
 		try {
 			Session session = sessionFactory.getCurrentSession();
-			session.getTransaction().begin();
 			
 			Criteria criteria = session.createCriteria(Role.class);
 			criteria.add(Expression.eq("role", role));

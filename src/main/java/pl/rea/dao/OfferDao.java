@@ -23,7 +23,6 @@ public class OfferDao {
 		List<Offer> offerList = null;
 		try {
 			Session session = sessionFactory.getCurrentSession();
-			session.getTransaction().begin();
 			
 			offerList = (List<Offer>) session.createCriteria(Offer.class).list();
 		} catch (Exception e) {
@@ -37,7 +36,6 @@ public class OfferDao {
 		Offer returnOffer = null;
 		try {
 			Session session = sessionFactory.getCurrentSession();
-			session.getTransaction().begin();
 			
 			returnOffer = (Offer) session.get(Offer.class, new Long(id));
 		} catch (Exception e) {
@@ -50,7 +48,6 @@ public class OfferDao {
 	public void updateOffer(Offer offer) {
 		try {
 			Session session = sessionFactory.getCurrentSession();
-			session.getTransaction().begin();
 
 			session.saveOrUpdate(offer);
 		} catch (Exception e) {
@@ -62,7 +59,6 @@ public class OfferDao {
 	public void deleteOffer(Offer offer) {
 		try {
 			Session session = sessionFactory.getCurrentSession();
-			session.getTransaction().begin();
 			
 			session.delete(offer);
 		} catch (Exception e) {
@@ -75,7 +71,6 @@ public class OfferDao {
 		String returnOwnerLogin = null;
 		try {
 			Session session = sessionFactory.getCurrentSession();
-			session.getTransaction().begin();
 
 			Criteria criteria = session.createCriteria(User.class, "userek");
 			criteria.createAlias("userek.offers", "offers");

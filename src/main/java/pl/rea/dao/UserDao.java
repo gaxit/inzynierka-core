@@ -23,7 +23,6 @@ public class UserDao {
 		List<User> userList = null;
 		try {
 			Session session = sessionFactory.getCurrentSession();
-			session.getTransaction().begin();
 			
 			userList = (List<User>) session.createCriteria(User.class).list();
 		} catch (Exception e) {
@@ -37,7 +36,6 @@ public class UserDao {
 		User returnUser = null;
 		try {
 			Session session = sessionFactory.getCurrentSession();
-			session.getTransaction().begin();
 			
 			returnUser = (User) session.get(User.class, new Long(id));
 		} catch (Exception e) {
@@ -51,7 +49,6 @@ public class UserDao {
 		User returnUser = null;
 		try {
 			Session session = sessionFactory.getCurrentSession();
-			session.getTransaction().begin();
 			
 			Criteria criteria = session.createCriteria(User.class);
 			criteria.add(Expression.eq("name", name));
@@ -72,7 +69,6 @@ public class UserDao {
 		User returnUser = null;
 		try {
 			Session session = sessionFactory.getCurrentSession();
-			session.getTransaction().begin();
 			
 			Criteria criteria = session.createCriteria(User.class);
 			criteria.add(Expression.eq("login", login));
@@ -92,7 +88,6 @@ public class UserDao {
 	public void updateUser(User user) {
 		try {
 			Session session = sessionFactory.getCurrentSession();
-			session.getTransaction().begin();
 
 			session.saveOrUpdate(user);
 		} catch (Exception e) {
@@ -104,7 +99,6 @@ public class UserDao {
 	public void saveUser(User user) {
 		try {
 			Session session = sessionFactory.getCurrentSession();
-			session.getTransaction().begin();
 			
 			session.save(user);
 		} catch (Exception e) {
@@ -116,7 +110,6 @@ public class UserDao {
 	public void deleteUser(User user) {
 		try {
 			Session session = sessionFactory.getCurrentSession();
-			session.getTransaction().begin();
 			
 			session.delete(user);
 		} catch (Exception e) {

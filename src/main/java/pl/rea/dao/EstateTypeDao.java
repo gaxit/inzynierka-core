@@ -23,7 +23,6 @@ public class EstateTypeDao {
 		List<EstateType> estateTypeList = null;
 		try {
 			Session session = sessionFactory.getCurrentSession();
-			session.getTransaction().begin();
 			
 			estateTypeList = (List<EstateType>) session.createCriteria(EstateType.class).list();
 		} catch (Exception e) {
@@ -37,7 +36,6 @@ public class EstateTypeDao {
 		EstateType returnEstateType = null;
 		try {
 			Session session = sessionFactory.getCurrentSession();
-			session.getTransaction().begin();
 			
 			Criteria criteria = session.createCriteria(EstateType.class);
 			criteria.add(Expression.eq("estateType",estateTypeName));

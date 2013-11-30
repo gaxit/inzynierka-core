@@ -3,8 +3,16 @@ package test;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+
 import java.util.Date;
 import java.util.List;
+
+
+
+
 
 
 
@@ -32,6 +40,7 @@ import pl.rea.model.Offer;
 import pl.rea.model.Role;
 import pl.rea.model.TransactionType;
 import pl.rea.model.User;
+import pl.rea.utils.HibernateUtil;
 import pl.rea.utils.LoggedUserUtils;
 import pl.rea.webservices.DicsService;
 
@@ -61,15 +70,22 @@ public class TestBean {
 	
 	public String test() {
 		System.out.println("Test bean start");
-//		List<String> transTypeList = dicsService.getRoleList();
+		
+//		List<String> transTypeList = dicsService.getEstateTypeList();
 //		for (String stringg : transTypeList) {
 //			System.out.println(stringg);
 //		}
-//		
-//		System.out.println("System time: " + System.currentTimeMillis());
 		
-		System.out.println("Uzytkownik zalogowany?: " + loggedUserUtils.isUserLogged("login3", "sessionid1"));
 		
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		Transaction tx = sessionFactory.getCurrentSession().getTransaction();
+		tx.begin();
+		
+		System.out.println("Administrator zalogowany?: " + loggedUserUtils.isAdminLogged("login3", "sessionid1"));
+		
+		tx.commit();
+		session.close();
 		
 		return null;
 	}

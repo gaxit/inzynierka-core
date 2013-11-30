@@ -21,7 +21,6 @@ public class TransactionTypeDao {
 		List<TransactionType> transactionTypeList = null;
 		try{
 			Session session = sessionFactory.getCurrentSession();
-			session.getTransaction().begin();
 			
 			transactionTypeList = (List<TransactionType>) session.createCriteria(TransactionType.class).list();
 		}
@@ -36,7 +35,6 @@ public class TransactionTypeDao {
 		TransactionType returnTransactionType = null;
 		try {
 			Session session = sessionFactory.getCurrentSession();
-			session.getTransaction().begin();
 			
 			Criteria criteria = session.createCriteria(TransactionType.class);
 			criteria.add(Expression.eq("transactionType", transactionTypeName));

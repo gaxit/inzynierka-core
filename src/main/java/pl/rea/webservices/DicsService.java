@@ -20,6 +20,7 @@ import pl.rea.model.Role;
 import pl.rea.model.TransactionType;
 import pl.rea.transform.DicsTransform;
 import pl.rea.utils.HibernateUtil;
+import pl.rea.utils.LoggedUserUtils;
 
 @WebService(serviceName = "dicsService")
 @Stateless
@@ -41,7 +42,8 @@ public class DicsService {
 		List<String> stringList = null;
 		try{
 			session = sessionFactory.openSession();
-			tx = session.beginTransaction();
+			tx = sessionFactory.getCurrentSession().getTransaction();
+			tx.begin();
 			
 			transTypeList = transTypeDao.getTransactionTypeList();
 			stringList = dicsTransform.transactionTypeListToStringList(transTypeList);
@@ -68,8 +70,10 @@ public class DicsService {
 		List<String> stringList = null;
 		try{
 			session = sessionFactory.openSession();
-			tx = session.beginTransaction();
+			tx = sessionFactory.getCurrentSession().getTransaction();
+			tx.begin();
 			
+			System.out.println("Is user logged?: " + (new LoggedUserUtils()).isUserLogged("x", "x"));
 			estateTypeList = estateTypeDao.getEstateTypeList();
 			stringList = dicsTransform.estateTypeListToStringList(estateTypeList);
 			
@@ -96,7 +100,8 @@ public class DicsService {
 		List<String> stringList = null;
 		try{
 			session = sessionFactory.openSession();
-			tx = session.beginTransaction();
+			tx = sessionFactory.getCurrentSession().getTransaction();
+			tx.begin();
 			
 			roleList = roleDao.getRoleList();
 			stringList = dicsTransform.roleListToStringList(roleList);
