@@ -3,7 +3,7 @@ package pl.rea.canonical;
 
 public class UserCanonical {
 	
-	private long id;
+	private Long id;
 	private String login;
 	private String password;
 	private String sessionId;
@@ -19,10 +19,10 @@ public class UserCanonical {
 	private int houseNo;
 	private int apartmentNo;
 	
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getLogin() {
