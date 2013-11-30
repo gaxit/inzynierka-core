@@ -1,5 +1,6 @@
 package pl.rea.transform;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -95,6 +96,24 @@ public class OfferTransform {
 		offerCanon.setOwner(offerDao.getOfferOwnerLogin(offer));
 		
 		return offerCanon;
+	}
+	
+	public List<OfferCanonical> offerListToOfferCanonicalList(List<Offer> offerList){
+		List<OfferCanonical> offerCanonList = new LinkedList<OfferCanonical>();
+		for (Offer offer : offerList) {
+			OfferCanonical offerCanon = offerToOfferCanonical(offer);
+			offerCanonList.add(offerCanon);
+		}
+		return offerCanonList;
+	}
+	
+	public List<Offer> offerCanonicalListToOfferList(List<OfferCanonical> offerCanonList){
+		List<Offer> offerList = new LinkedList<Offer>();
+		for (OfferCanonical offerCanon : offerCanonList) {
+			Offer offer = offerCanonicalToOffer(offerCanon);
+			offerList.add(offer);
+		}
+		return offerList;
 	}
 
 }
