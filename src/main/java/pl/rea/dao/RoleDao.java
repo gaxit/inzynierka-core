@@ -17,7 +17,7 @@ import pl.rea.utils.HibernateUtil;
 public class RoleDao {
 	private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 	
-	// ?
+	// ok
 	public List<Role> getRoleList() {
 		List<Role> roleList = null;
 		try {

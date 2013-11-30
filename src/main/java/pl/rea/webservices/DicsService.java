@@ -12,7 +12,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import pl.rea.dao.EstateTypeDao;
+import pl.rea.dao.RoleDao;
 import pl.rea.dao.TransactionTypeDao;
+import pl.rea.model.EstateType;
+import pl.rea.model.Role;
 import pl.rea.model.TransactionType;
 import pl.rea.transform.DicsTransform;
 import pl.rea.utils.HibernateUtil;
@@ -23,8 +27,11 @@ public class DicsService {
 	
 	private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 	
-	private TransactionTypeDao transTypeDao = new TransactionTypeDao();
 	private DicsTransform dicsTransform = new DicsTransform();
+	private TransactionTypeDao transTypeDao = new TransactionTypeDao();
+	private EstateTypeDao estateTypeDao = new EstateTypeDao();
+	private RoleDao roleDao = new RoleDao();
+	
 	
 	@WebMethod(operationName = "getTransactionTypeList", action="getTransactionTypeList")
 	public List<String> getTransactionTypeList(){
@@ -42,7 +49,62 @@ public class DicsService {
 			tx.commit();
 		}
 		catch(Exception e){
-			System.out.println("Exception in getTransactionTypeList service: " + e.getMessage());
+			System.out.println("DicsService getTransactionTypeList exception: " + e.getMessage());
+			tx.rollback();
+		}
+		finally {
+			if (session != null && session.isOpen()) {
+                session.close();
+            }
+		}
+		return stringList;
+	}
+	
+	@WebMethod(operationName = "getEstateTypeList", action="getEstateTypeList")
+	public List<String> getEstateTypeList(){
+		Session session = null;
+		Transaction tx = null;
+		List<EstateType> estateTypeList = null;
+		List<String> stringList = null;
+		try{
+			session = sessionFactory.openSession();
+			tx = session.beginTransaction();
+			
+			estateTypeList = estateTypeDao.getEstateTypeList();
+			stringList = dicsTransform.estateTypeListToStringList(estateTypeList);
+			
+			tx.commit();
+		}
+		catch(Exception e){
+			System.out.println("DicsService getEstateTypeList exception: " + e.getMessage());
+			tx.rollback();
+		}
+		finally {
+			if (session != null && session.isOpen()) {
+                session.close();
+            }
+		}
+		return stringList;
+	}
+	
+	
+	@WebMethod(operationName = "getRoleList", action="getRoleList")
+	public List<String> getRoleList(){
+		Session session = null;
+		Transaction tx = null;
+		List<Role> roleList = null;
+		List<String> stringList = null;
+		try{
+			session = sessionFactory.openSession();
+			tx = session.beginTransaction();
+			
+			roleList = roleDao.getRoleList();
+			stringList = dicsTransform.roleListToStringList(roleList);
+			
+			tx.commit();
+		}
+		catch(Exception e){
+			System.out.println("DicsService getRoleList exception: " + e.getMessage());
 			tx.rollback();
 		}
 		finally {

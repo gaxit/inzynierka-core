@@ -18,7 +18,7 @@ import pl.rea.utils.HibernateUtil;
 public class EstateTypeDao {
 	SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 	
-	// ?
+	// ok
 	public List<EstateType> getEstateTypeList() {
 		List<EstateType> estateTypeList = null;
 		try {
