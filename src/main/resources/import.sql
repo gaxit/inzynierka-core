@@ -25,5 +25,5 @@ INSERT INTO owner_offer (user_id, offer_id) VALUES (10001, 10002);
 INSERT INTO owner_offer (user_id, offer_id) VALUES (10002, 10003);
 INSERT INTO owner_offer (user_id, offer_id) VALUES (10002, 10004);
 
-INSERT INTO favouries (user_id, offer_id) VALUES (10003, 10001);
-INSERT INTO favouries (user_id, offer_id) VALUES (10003, 10003);
+INSERT INTO favourites (user_id, offer_id) VALUES (10003, 10001);
+INSERT INTO favourites (user_id, offer_id) VALUES (10003, 10003);
