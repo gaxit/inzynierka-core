@@ -82,7 +82,9 @@ public class TestBean {
 		Transaction tx = sessionFactory.getCurrentSession().getTransaction();
 		tx.begin();
 		
-		System.out.println("Administrator zalogowany?: " + loggedUserUtils.isAdminLogged("login3", "sessionid1"));
+//		System.out.println("Administrator zalogowany?: " + loggedUserUtils.isAdminLogged("login3", "sessionid1"));
+		
+		System.out.println("Test metody isAdminLoggedOrLoginsAreTheSame: " + loggedUserUtils.isAdminLoggedOrLoginsAreTheSame("login2", "sessionid1", "login2"));
 		
 		tx.commit();
 		session.close();

@@ -54,5 +54,12 @@ public class LoggedUserUtils {
 		}
 		return false;
 	}
+	
+	public boolean isAdminLoggedOrLoginsAreTheSame(String login, String sessionId, String loginToCompare){
+		if (isAdminLogged(login, sessionId) || login.equals(loginToCompare)){
+			return true;
+		}
+		return false;
+	}
 
 }
