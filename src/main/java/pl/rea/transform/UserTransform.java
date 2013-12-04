@@ -16,11 +16,11 @@ import pl.rea.model.User;
 @Stateless
 public class UserTransform {
 	
-	@EJB
-	UserDao userDao;
+//	@EJB
+	UserDao userDao = new UserDao();
 	
-	@EJB
-	RoleDao roleDao;
+//	@EJB
+	RoleDao roleDao = new RoleDao();
 	
 	public UserCanonical userToUserCanonical(User user){
 		UserCanonical userCanon = new UserCanonical();
@@ -50,7 +50,8 @@ public class UserTransform {
 			user = new User();
 		}
 		else{
-			user = userDao.getUserById(userCanon.getId());
+			user = new User();
+			user.setId(userCanon.getId());
 		}
 		
 		user.setEmail(userCanon.getEmail());

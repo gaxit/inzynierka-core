@@ -47,11 +47,11 @@ public class User {
 	@NotNull
 	private Role role;
 	
-	@OneToMany(cascade = {CascadeType.ALL})
+	@OneToMany
 	@JoinTable(name = "favourites", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "offer_id") })
 	private List<Offer> favourites;
 	
-	@OneToMany(cascade = {CascadeType.ALL})
+	@OneToMany
 	@JoinTable(name = "owner_offer", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "offer_id") })
 	private List<Offer> offers;
 	

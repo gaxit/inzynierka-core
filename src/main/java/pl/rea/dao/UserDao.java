@@ -10,7 +10,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Expression;
 
+import pl.rea.canonical.UserCanonical;
 import pl.rea.model.User;
+import pl.rea.transform.UserTransform;
 import pl.rea.utils.HibernateUtil;
 
 @Stateless
@@ -84,22 +86,23 @@ public class UserDao {
 		return returnUser;
 	}
 	
-	// ?
+	// ok
 	public void updateUser(User user) {
 		try {
 			Session session = sessionFactory.getCurrentSession();
 
-			session.saveOrUpdate(user);
+			session.merge(user);
 		} catch (Exception e) {
 			System.out.println("UserDao updateUser exception: " + e.getMessage());
 		}
 	}
 	
-	// ?
+	// ok
 	public void saveUser(User user) {
 		try {
 			Session session = sessionFactory.getCurrentSession();
 			
+			session.saveOrUpdate(user.getAddress());
 			session.save(user);
 		} catch (Exception e) {
 			System.out.println("UserDao saveUser exception: " + e.getMessage());
@@ -114,6 +117,28 @@ public class UserDao {
 			session.delete(user);
 		} catch (Exception e) {
 			System.out.println("UserDao deleteUser exception: " + e.getMessage());
+		}
+	}
+	
+	// ?
+	public void deleteUserByLogin(String login) {
+		try {
+			Session session = sessionFactory.getCurrentSession();
+			
+			User user = null;
+			
+			Criteria criteria = session.createCriteria(User.class);
+			criteria.add(Expression.eq("login", login));
+			List<User> userList = criteria.list();
+			if (userList.size() > 0) {
+				user = userList.get(0);
+			} else {
+				user = null;
+			}
+//			session.delete(user.getAddress());
+			session.delete(user);
+		} catch (Exception e) {
+			System.out.println("UserDao deleteUserByLogin exception: " + e.getMessage());
 		}
 	}
 
