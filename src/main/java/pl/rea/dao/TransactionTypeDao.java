@@ -30,7 +30,7 @@ public class TransactionTypeDao {
 		return transactionTypeList;
 	}
 
-	// ?
+	// ok
 	public TransactionType getTransactionTypeByName(String transactionTypeName) {
 		TransactionType returnTransactionType = null;
 		try {

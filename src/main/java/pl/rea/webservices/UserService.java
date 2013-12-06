@@ -1,5 +1,7 @@
 package pl.rea.webservices;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.jws.WebService;
 
@@ -343,6 +345,36 @@ public class UserService {
 		           }
 			}
 			return returnUser;
+		}
+		return null;
+	}
+	
+	
+	public List<UserCanonical> getUserList(String login, String sessionId){
+		if (login != null && sessionId != null) {
+			Session session = null;
+			Transaction tx = null;
+			List<UserCanonical> userList = null;
+			try{
+				session = sessionFactory.openSession();
+				tx = sessionFactory.getCurrentSession().getTransaction();
+				tx.begin();
+				
+				// czy admin jest zalogowany
+				// pobranie uzytkownikow
+				
+				tx.commit();
+			}
+			catch(Exception e){
+				System.out.println("UserService getUserList exception: " + e.getMessage());
+				tx.rollback();
+			}
+			finally {
+				if (session != null && session.isOpen()) {
+		               session.close();
+		           }
+			}
+			return userList;
 		}
 		return null;
 	}

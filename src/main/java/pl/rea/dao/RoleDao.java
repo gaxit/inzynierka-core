@@ -30,7 +30,7 @@ public class RoleDao {
 		return roleList;
 	}
 	
-	// ?
+	// ok
 	public Role getRoleByName(String role) {
 		Role returnRole = null;
 		try {

@@ -18,7 +18,7 @@ import pl.rea.utils.HibernateUtil;
 public class OfferDao {
 	private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
-	// ?
+	// ok
 	public List<Offer> getOfferList() {
 		List<Offer> offerList = null;
 		try {
@@ -31,7 +31,7 @@ public class OfferDao {
 		return offerList;
 	}
 
-	// ?
+	// ok
 	public Offer getOfferById(Long id) {
 		Offer returnOffer = null;
 		try {
@@ -44,7 +44,7 @@ public class OfferDao {
 		return returnOffer;
 	}
 	
-	// ?
+	// ok
 	public void updateOffer(Offer offer) {
 		try {
 			Session session = sessionFactory.getCurrentSession();
@@ -66,7 +66,7 @@ public class OfferDao {
 		}
 	}
 	
-	// ?
+	// ok
 	public String getOfferOwnerLogin(Offer offer) {
 		String returnOwnerLogin = null;
 		try {
@@ -82,6 +82,7 @@ public class OfferDao {
 		return returnOwnerLogin;
 	}
 	
+	// ok
 	public void saveOffer(Offer offer){
 		try{
 			Session session = sessionFactory.getCurrentSession();

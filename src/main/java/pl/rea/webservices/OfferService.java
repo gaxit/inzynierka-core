@@ -211,7 +211,7 @@ public class OfferService {
 				tx.commit();
 			} catch (Exception e) {
 				System.out
-					.println("UserService addOfferToUserFavourites exception: "
+					.println("UserService deleteOfferFromUserFavourites exception: "
 							+ e.getMessage());
 			tx.rollback();
 			returnValue = false;
@@ -222,6 +222,45 @@ public class OfferService {
 			}
 			return returnValue;
 		}	
+		return false;
+	}
+	
+	// ok
+	public boolean isOfferInUserFavourites(String login, String sessionId,
+			Long offerId, String userLoginFavourites){
+		if (login != null && sessionId != null && offerId != null
+				&& userLoginFavourites != null) {
+			Session session = null;
+			Transaction tx = null;
+			boolean returnValue = false;
+			try {
+				session = sessionFactory.openSession();
+				tx = sessionFactory.getCurrentSession().getTransaction();
+				tx.begin();
+
+				if (loggedUserUtils.isLogged(login, sessionId)
+						&& loggedUserUtils.isAdminLoggedOrLoginsAreTheSame(
+								login, sessionId, userLoginFavourites)) {
+					User user = userDao.getUserByLogin(userLoginFavourites);
+					for (Offer offer2 : user.getFavourites()) {
+						if (offer2.getId().equals(offerId)){
+							returnValue = true;
+							break;
+						}
+					}
+				}
+				tx.commit();
+			} catch (Exception e) {
+				System.out.println("UserService isOfferInUserFavourites exception: "	+ e.getMessage());
+				tx.rollback();
+				returnValue = false;
+			} finally {
+				if (session != null && session.isOpen()) {
+					session.close();
+				}
+			}
+			return returnValue;
+		}
 		return false;
 	}
 	
@@ -303,12 +342,10 @@ public class OfferService {
 		return false;
 	}
 	
-	// czy oferta jest w ulubionych uzytkownika
-	
-	public boolean isOfferInUserFavourites(String login, String sessionId,
-			Long offerId, String userLoginFavourites){
+	public boolean deleteOffer(String login, String sessionId,
+			Long offerId, String userLoginToAddOffer){
 		if (login != null && sessionId != null && offerId != null
-				&& userLoginFavourites != null) {
+				&& userLoginToAddOffer != null) {
 			Session session = null;
 			Transaction tx = null;
 			boolean returnValue = false;
@@ -319,18 +356,13 @@ public class OfferService {
 
 				if (loggedUserUtils.isLogged(login, sessionId)
 						&& loggedUserUtils.isAdminLoggedOrLoginsAreTheSame(
-								login, sessionId, userLoginFavourites)) {
-					User user = userDao.getUserByLogin(userLoginFavourites);
-					for (Offer offer2 : user.getFavourites()) {
-						if (offer2.getId().equals(offerId)){
-							returnValue = true;
-							break;
-						}
-					}
+								login, sessionId, userLoginToAddOffer)) {
+					// usuwanie oferty podanego uzytkownika
+					// usuniecie oferty z ulubionych innych uzytkownikow					
 				}
 				tx.commit();
 			} catch (Exception e) {
-				System.out.println("UserService updateOffer exception: "	+ e.getMessage());
+				System.out.println("UserService deleteOffer exception: "	+ e.getMessage());
 				tx.rollback();
 				returnValue = false;
 			} finally {
@@ -342,15 +374,30 @@ public class OfferService {
 		}
 		return false;
 	}
-	
-	// usuniecie oferty
 
 	public List<OfferCanonical> findOffers(int minPrice, int maxPrice,
 			int minArea, int maxArea, String estateType, String town,
 			boolean isGarage, int floor) {
-		// wyszukanie ofert o podanych kryteriach
-
-		return null;
+		Session session = null;
+		Transaction tx = null;
+		List<OfferCanonical> foundOffers = null;
+		try {
+			session = sessionFactory.openSession();
+			tx = sessionFactory.getCurrentSession().getTransaction();
+			tx.begin();
+			
+			// wyszukanie ofert o podanych kryteriach
+			
+			tx.commit();
+		} catch (Exception e) {
+			System.out.println("UserService findOffers exception: "	+ e.getMessage());
+			tx.rollback();
+		} finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
+		}
+		return foundOffers;
 	}
 
 }

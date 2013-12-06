@@ -31,7 +31,7 @@ public class EstateTypeDao {
 		return estateTypeList;
 	}
 	
-	// ?
+	// ok
 	public EstateType getEstateTypeByName(String estateTypeName) {
 		EstateType returnEstateType = null;
 		try {

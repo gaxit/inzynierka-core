@@ -33,39 +33,6 @@ public class UserDao {
 		return userList;
 	}
 	
-	// ?
-	public User getUserById(Long id) {
-		User returnUser = null;
-		try {
-			Session session = sessionFactory.getCurrentSession();
-			
-			returnUser = (User) session.get(User.class, new Long(id));
-		} catch (Exception e) {
-			System.out.println("UserDao getUserById exception: " + e.getMessage());
-		}
-		return returnUser;
-	}
-	
-	// ?
-	public User getUserByName(String name) {
-		User returnUser = null;
-		try {
-			Session session = sessionFactory.getCurrentSession();
-			
-			Criteria criteria = session.createCriteria(User.class);
-			criteria.add(Expression.eq("name", name));
-			List<User> userList = criteria.list();
-			if (userList.size() > 0) {
-				returnUser = userList.get(0);
-			} else {
-				returnUser = null;
-			}
-		} catch (Exception e) {
-			System.out.println("UserDao getUserByName exception: " + e.getMessage());
-		}
-		return returnUser;
-	}
-	
 	// ok
 	public User getUserByLogin(String login) {
 		User returnUser = null;
@@ -120,7 +87,7 @@ public class UserDao {
 		}
 	}
 	
-	// ?
+	// ok
 	public void deleteUserByLogin(String login) {
 		try {
 			Session session = sessionFactory.getCurrentSession();
@@ -135,7 +102,6 @@ public class UserDao {
 			} else {
 				user = null;
 			}
-//			session.delete(user.getAddress());
 			session.delete(user);
 		} catch (Exception e) {
 			System.out.println("UserDao deleteUserByLogin exception: " + e.getMessage());
