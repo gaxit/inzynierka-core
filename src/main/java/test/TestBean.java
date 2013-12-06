@@ -118,7 +118,9 @@ public class TestBean {
 		offer.setId(10001);
 		
 //		System.out.println("Offer update: " + offerService.updateOffer("user1", "sessionid1", offer, "user1"));
-		System.out.println("Offer delete from userFavourites: " + offerService.deleteOfferFromUserFavourites("admin1", "sessionid1", (long)10003, "admin1"));
+//		System.out.println("Offer delete from userFavourites: " + offerService.deleteOfferFromUserFavourites("admin1", "sessionid1", (long)10003, "admin1"));
+		
+		System.out.println("Is offer in userFavourites: " + offerService.isOfferInUserFavourites("admin1", "sessionid1", (long)10003, "admin1"));
 		
 		
 //		offerService.addOffer("user1", "sessionid1", offer, "user1");

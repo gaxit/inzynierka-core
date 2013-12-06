@@ -305,6 +305,44 @@ public class OfferService {
 	
 	// czy oferta jest w ulubionych uzytkownika
 	
+	public boolean isOfferInUserFavourites(String login, String sessionId,
+			Long offerId, String userLoginFavourites){
+		if (login != null && sessionId != null && offerId != null
+				&& userLoginFavourites != null) {
+			Session session = null;
+			Transaction tx = null;
+			boolean returnValue = false;
+			try {
+				session = sessionFactory.openSession();
+				tx = sessionFactory.getCurrentSession().getTransaction();
+				tx.begin();
+
+				if (loggedUserUtils.isLogged(login, sessionId)
+						&& loggedUserUtils.isAdminLoggedOrLoginsAreTheSame(
+								login, sessionId, userLoginFavourites)) {
+					User user = userDao.getUserByLogin(userLoginFavourites);
+					for (Offer offer2 : user.getFavourites()) {
+						if (offer2.getId().equals(offerId)){
+							returnValue = true;
+							break;
+						}
+					}
+				}
+				tx.commit();
+			} catch (Exception e) {
+				System.out.println("UserService updateOffer exception: "	+ e.getMessage());
+				tx.rollback();
+				returnValue = false;
+			} finally {
+				if (session != null && session.isOpen()) {
+					session.close();
+				}
+			}
+			return returnValue;
+		}
+		return false;
+	}
+	
 	// usuniecie oferty
 
 	public List<OfferCanonical> findOffers(int minPrice, int maxPrice,
