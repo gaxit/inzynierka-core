@@ -20,17 +20,17 @@ import pl.rea.model.TransactionType;
 @Stateless
 public class OfferTransform {
 	
-	@EJB
-	EstateTypeDao estateTypeDao;
+//	@EJB
+	EstateTypeDao estateTypeDao = new EstateTypeDao();
 	
-	@EJB
-	TransactionTypeDao transactionTypeDao;
+//	@EJB
+	TransactionTypeDao transactionTypeDao = new TransactionTypeDao();
 	
-	@EJB
-	ImagesTransform imageTransform;
+//	@EJB
+	ImagesTransform imageTransform = new ImagesTransform();
 	
-	@EJB
-	OfferDao offerDao;
+//	@EJB
+	OfferDao offerDao = new OfferDao();
 	
 	//nie testowane
 	public Offer offerCanonicalToOffer(OfferCanonical offerCanon){
