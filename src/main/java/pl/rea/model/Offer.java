@@ -1,6 +1,7 @@
 package pl.rea.model;
 
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -53,6 +54,21 @@ public class Offer {
 	private int price;
 	
 	private String description;
+	
+	public Offer(){
+		this.address = null;
+		this.area = 0;
+		this.creationDate = null;
+		this.description = null;
+		this.estateType = null;
+		this.finishDate = null;
+		this.floor = 0;
+		this.garage = false;
+		this.id = null;
+		this.images = new LinkedList<Images>();
+		this.price = 0;
+		this.transactionType = null;
+	}
 
 	public Long getId() {
 		return id;

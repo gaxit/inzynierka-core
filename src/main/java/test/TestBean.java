@@ -32,6 +32,8 @@ import java.util.List;
 
 
 
+
+import pl.rea.canonical.OfferCanonical;
 import pl.rea.canonical.UserCanonical;
 import pl.rea.dao.EstateTypeDao;
 import pl.rea.dao.OfferDao;
@@ -79,44 +81,54 @@ public class TestBean {
 	public String test() {
 		System.out.println("Test bean start");
 		
-//		System.out.println("All offer size: " + offerService.getAllOffers().size());
-//		System.out.println("Offer estaet type: " + offerService.getOffer((long)10001).getEstateType());
+		
+		UserCanonical user = new UserCanonical();
+		user.setAddressId(10001);
+		user.setApartmentNo(1);
+		user.setEmail("user1");
+		user.setSessionId("sessionid1");
+		user.setHouseNo(1);
+		user.setId((long)10002);
+		user.setLogin("user1");
+		user.setName("name");
+		user.setPassword("password");
+		user.setPhoneNumber("phone");
+		user.setPostalCode("postal");
+		user.setRole("Administrator");
+		user.setStreet("street");
+		user.setTown("town");
+		
+		OfferCanonical offer = new OfferCanonical();
+		offer.setAddressId(10002);
+		offer.setApartmentNo(5);
+		offer.setArea(50);
+		offer.setCreationDate(new Date());
+		offer.setDescription("Opis");
+		offer.setEstateType("Dom");
+		offer.setFinishDate(new Date());
+		offer.setFloor(5);
+		offer.setGarage(true);
+		offer.setHouseNo(5);
+		offer.setOwner("user1");
+		offer.setPostalCode("39-200");
+		offer.setPrice(200000);
+		offer.setStreet("Ulica");
+		offer.setTown("Dębica");
+		offer.setTransactionType("Wynajem");
+		offer.setId(10001);
+		
+//		System.out.println("Offer update: " + offerService.updateOffer("user1", "sessionid1", offer, "user1"));
+		System.out.println("Offer delete from userFavourites: " + offerService.deleteOfferFromUserFavourites("admin1", "sessionid1", (long)10003, "admin1"));
+		
+		
+//		offerService.addOffer("user1", "sessionid1", offer, "user1");
+//		offerService.addOfferToUserFavourites("admin1", "sessionid1", (long)10001, "admin1");
+		
+//		System.out.println("User favourites: " + offerService.getUserFavouritesOffers("admin1", "sessionid1", "admin1").size());
 		
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-//		System.out.println("User zalogowany?: " + userService.isUserLogged("admin1", "sessionid1"));
-//		System.out.println("Logowanie: " + userService.logIn(null, "admin"));
-//		System.out.println("Wylogowywanie: " + userService.logOut("admin1", "sessioni1"));
-		
-//		UserCanonical user = new UserCanonical();
-//		user.setAddressId(10001);
-//		user.setApartmentNo(1);
-//		user.setEmail("user1");
-//		user.setSessionId("sessionid1");
-//		user.setHouseNo(1);
-//		user.setId((long)10002);
-//		user.setLogin("user1");
-//		user.setName("name");
-//		user.setPassword("password");
-//		user.setPhoneNumber("phone");
-//		user.setPostalCode("postal");
-//		user.setRole("Administrator");
-//		user.setStreet("street");
-//		user.setTown("town");
-//		System.out.println("Dodawanie uzytkownika: " + userService.createUser(user));
-//		System.out.println("Edytowanie uzytkownika: " + userService.editUser("admin1", "sessionid1", user));
-//		System.out.println("Usuwanie uzytkownika: " + userService.deleteUser("admin1", "sessionid1", "user1"));
-//		System.out.println("User name: " + userService.getUser("admin1", "sessionid1", "user1").getName());
 		
 		
 		

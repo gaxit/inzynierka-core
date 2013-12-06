@@ -81,5 +81,16 @@ public class OfferDao {
 		}
 		return returnOwnerLogin;
 	}
+	
+	public void saveOffer(Offer offer){
+		try{
+			Session session = sessionFactory.getCurrentSession();
+			
+			session.save(offer);
+			
+		} catch (Exception e) {
+			System.out.println("OfferDao saveOffer exception: " + e.getMessage());
+		}
+	}
 
 }

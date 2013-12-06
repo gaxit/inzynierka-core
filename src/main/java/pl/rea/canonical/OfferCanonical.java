@@ -1,6 +1,7 @@
 package pl.rea.canonical;
 
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 public class OfferCanonical {
@@ -24,6 +25,27 @@ public class OfferCanonical {
 	private String street;
 	private int houseNo;
 	private int apartmentNo;
+	
+	public OfferCanonical(){
+		this.addressId = 0;
+		this.apartmentNo = 0;
+		this.area = 0;
+		this.creationDate = null;
+		this.description = null;
+		this.estateType = null;
+		this.finishDate = null;
+		this.floor = 0;
+		this.garage = false;
+		this.houseNo = 0;
+		this.id = 0;
+		this.images = new LinkedList<ImageCanonical>();
+		this.owner = null;
+		this.postalCode = null;
+		this.price = 0;
+		this.street = null;
+		this.town = null;
+		this.transactionType = null;
+	}
 	
 	public long getId() {
 		return id;
