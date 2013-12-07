@@ -349,7 +349,7 @@ public class UserService {
 		return null;
 	}
 	
-	
+	// ok
 	public List<UserCanonical> getUserList(String login, String sessionId){
 		if (login != null && sessionId != null) {
 			Session session = null;
@@ -360,8 +360,10 @@ public class UserService {
 				tx = sessionFactory.getCurrentSession().getTransaction();
 				tx.begin();
 				
-				// czy admin jest zalogowany
-				// pobranie uzytkownikow
+				if (loggedUserUtils.isAdminLogged(login, sessionId)){
+					List<User> userDBList = userDao.getUserList();
+					userList = userTransform.userListToUserCanonicalList(userDBList);
+				}
 				
 				tx.commit();
 			}
