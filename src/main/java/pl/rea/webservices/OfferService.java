@@ -390,10 +390,11 @@ public class OfferService {
 		}
 		return false;
 	}
-
-	public List<OfferCanonical> findOffers(int minPrice, int maxPrice,
-			int minArea, int maxArea, String estateType, String town,
-			boolean isGarage, int floor) {
+	
+	// ok
+	public List<OfferCanonical> findOffersByCriteria(Integer minPrice, Integer maxPrice,
+			Integer minArea, Integer maxArea, Integer minFloor, Integer maxFloor, 
+			Boolean isGarage, String town, String estateType, String transactionType) {
 		Session session = null;
 		Transaction tx = null;
 		List<OfferCanonical> foundOffers = null;
@@ -402,7 +403,9 @@ public class OfferService {
 			tx = sessionFactory.getCurrentSession().getTransaction();
 			tx.begin();
 			
-			// wyszukanie ofert o podanych kryteriach
+			List<Offer> offerDbList = offerDao.getOffersByCriteria(minPrice, maxPrice,
+					minArea, maxArea, minFloor, maxFloor, isGarage, town, estateType, transactionType);
+			foundOffers = offerTransform.offerListToOfferCanonicalList(offerDbList);
 			
 			tx.commit();
 		} catch (Exception e) {

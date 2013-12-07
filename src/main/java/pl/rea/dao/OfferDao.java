@@ -9,6 +9,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Expression;
+import org.hibernate.criterion.ProjectionList;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import pl.rea.model.Offer;
@@ -111,6 +113,57 @@ public class OfferDao {
 		} catch (Exception e) {
 			System.out.println("OfferDao deleteFavouritesByOfferId exception: " + e.getMessage());
 		}
+	}
+	
+	public List<Offer> getOffersByCriteria(Integer minPrice, Integer maxPrice,
+			Integer minArea, Integer maxArea, Integer minFloor, Integer maxFloor, 
+			Boolean isGarage, String town, String estateType, String transactionType){
+		List<Offer> offerList = null;
+		try{
+			Session session = sessionFactory.getCurrentSession();
+			
+			Criteria criteria = session.createCriteria(Offer.class, "offer");
+			
+			if (minPrice != null){
+				criteria.add(Expression.ge("price", minPrice));
+			}
+			if (maxPrice != null){
+				criteria.add(Expression.le("price", maxPrice));
+			}
+			if (minArea != null){
+				criteria.add(Expression.ge("area", minArea));
+			}
+			if (maxArea != null){
+				criteria.add(Expression.le("area", maxArea));
+			}
+			if (minFloor != null){
+				criteria.add(Expression.ge("floor", minFloor));
+			}
+			if (maxFloor != null){
+				criteria.add(Expression.le("floor", maxFloor));
+			}
+			if (isGarage != null){
+				criteria.add(Expression.eq("garage", isGarage));
+			}
+			if (town != null){
+				criteria.createAlias("offer.address", "address");
+				criteria.add(Expression.eq("address.town", town));
+			}
+			if (estateType != null){
+				criteria.createAlias("offer.estateType", "estateType");
+				criteria.add(Expression.eq("estateType.estateType", estateType));
+			}
+			if (transactionType != null){
+				criteria.createAlias("offer.transactionType", "transType");
+				criteria.add(Expression.eq("transType.transactionType", transactionType));
+			}
+			
+			offerList = criteria.list();
+			
+		} catch (Exception e) {
+			System.out.println("OfferDao getOffersByCriteria exception: " + e.getMessage());
+		}
+		return offerList;
 	}
 
 }

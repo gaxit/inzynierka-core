@@ -33,6 +33,7 @@ import java.util.List;
 
 
 
+
 import pl.rea.canonical.OfferCanonical;
 import pl.rea.canonical.UserCanonical;
 import pl.rea.dao.EstateTypeDao;
@@ -124,15 +125,20 @@ public class TestBean {
 		
 //		System.out.println("User list size: " + userService.getUserList("admin1", "sessionid1").size());
 		
-		System.out.println("Usuwanie oferty: " + offerService.deleteOffer("admin1", "sessionid1", (long)10003, "admin1"));
+//		System.out.println("Usuwanie oferty: " + offerService.deleteOffer("admin1", "sessionid1", (long)10003, "admin1"));
 		
 //		offerService.addOffer("user1", "sessionid1", offer, "user1");
 //		offerService.addOfferToUserFavourites("admin1", "sessionid1", (long)10001, "admin1");
 		
 //		System.out.println("User favourites: " + offerService.getUserFavouritesOffers("admin1", "sessionid1", "admin1").size());
 		
+		// minPrice, maxPrice, minArea, maxArea, minFloor, maxFloor, isGarage, town, estateType, transactionType
 		
-		
+		List<OfferCanonical> foundOffers = offerService.findOffersByCriteria(null, null, null, null, null, null, null, null, null, null);
+		System.out.println("Found offer list size: " + foundOffers.size());
+		for (OfferCanonical offerCanonical : foundOffers) {
+			System.out.println("Found offer id: " + offerCanonical.getId());
+		}
 		
 		
 		
