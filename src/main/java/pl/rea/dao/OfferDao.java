@@ -8,6 +8,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Expression;
 import org.hibernate.criterion.Restrictions;
 
 import pl.rea.model.Offer;
@@ -55,12 +56,19 @@ public class OfferDao {
 		}
 	}
 	
-	// ?
-	public void deleteOffer(Offer offer) {
+	// ok
+	public void deleteOfferById(Long id) {
 		try {
 			Session session = sessionFactory.getCurrentSession();
 			
-			session.delete(offer);
+			Criteria criteria = session.createCriteria(Offer.class);
+			criteria.add(Expression.eq("id", id));
+			List<Offer> offerList = criteria.list();
+			Offer offer = null;
+			if (offerList.size() > 0) {
+				offer = offerList.get(0);
+				session.delete(offer);
+			}			
 		} catch (Exception e) {
 			System.out.println("OfferDao deleteOffer exception: " + e.getMessage());
 		}
@@ -91,6 +99,17 @@ public class OfferDao {
 			
 		} catch (Exception e) {
 			System.out.println("OfferDao saveOffer exception: " + e.getMessage());
+		}
+	}
+	
+	// ok
+	public void deleteFavouritesByOfferId(Long id){
+		try{
+			Session session = sessionFactory.getCurrentSession();
+			
+			session.createSQLQuery("DELETE FROM favourites WHERE offer_id=" + (long)id).executeUpdate();
+		} catch (Exception e) {
+			System.out.println("OfferDao deleteFavouritesByOfferId exception: " + e.getMessage());
 		}
 	}
 

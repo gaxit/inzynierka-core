@@ -122,7 +122,9 @@ public class TestBean {
 		
 //		System.out.println("Is offer in userFavourites: " + offerService.isOfferInUserFavourites("admin1", "sessionid1", (long)10003, "admin1"));
 		
-		System.out.println("User list size: " + userService.getUserList("admin1", "sessionid1").size());
+//		System.out.println("User list size: " + userService.getUserList("admin1", "sessionid1").size());
+		
+		System.out.println("Usuwanie oferty: " + offerService.deleteOffer("admin1", "sessionid1", (long)10003, "admin1"));
 		
 //		offerService.addOffer("user1", "sessionid1", offer, "user1");
 //		offerService.addOfferToUserFavourites("admin1", "sessionid1", (long)10001, "admin1");

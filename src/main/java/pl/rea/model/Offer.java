@@ -31,7 +31,7 @@ public class Offer {
 	@NotNull
 	private Address address;
 	
-	@OneToOne(cascade = {CascadeType.ALL})
+	@OneToOne
 	@NotNull
 	private EstateType estateType;
 	

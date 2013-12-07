@@ -343,9 +343,9 @@ public class OfferService {
 	}
 	
 	public boolean deleteOffer(String login, String sessionId,
-			Long offerId, String userLoginToAddOffer){
+			Long offerId, String userLoginToDeleteOffer){
 		if (login != null && sessionId != null && offerId != null
-				&& userLoginToAddOffer != null) {
+				&& userLoginToDeleteOffer != null) {
 			Session session = null;
 			Transaction tx = null;
 			boolean returnValue = false;
@@ -356,9 +356,25 @@ public class OfferService {
 
 				if (loggedUserUtils.isLogged(login, sessionId)
 						&& loggedUserUtils.isAdminLoggedOrLoginsAreTheSame(
-								login, sessionId, userLoginToAddOffer)) {
+								login, sessionId, userLoginToDeleteOffer)) {
 					// usuwanie oferty podanego uzytkownika
-					// usuniecie oferty z ulubionych innych uzytkownikow					
+					// usuniecie oferty z ulubionych innych uzytkownikow
+					// usuniecie oferty z ofert
+					offerDao.deleteFavouritesByOfferId(offerId);
+					
+					User user = userDao.getUserByLogin(userLoginToDeleteOffer);
+					List<Offer> offerList = user.getOffers();
+					for (Offer offer : offerList) {
+						if (offer.getId().equals(offerId)){
+							user.getOffers().remove(offer);
+							break;
+						}
+					}
+					userDao.updateUser(user);
+					
+					offerDao.deleteOfferById(offerId);
+					
+					returnValue = true;
 				}
 				tx.commit();
 			} catch (Exception e) {
