@@ -3,6 +3,7 @@ package pl.rea.webservices;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.jws.WebMethod;
 import javax.jws.WebService;
 
 import org.hibernate.Session;
@@ -28,6 +29,7 @@ public class UserService {
 	private UserTransform userTransform = new UserTransform();
 
 	// ok
+	@WebMethod(operationName="isAnybodyLogged", action="isAnybodyLogged")
 	public boolean isAnybodyLogged(String login, String sessionId) {
 		if (login != null && sessionId != null) {
 			boolean returnValue = false;
@@ -57,6 +59,7 @@ public class UserService {
 	}
 	
 	// ok
+	@WebMethod(operationName="isUserLogged", action="isUserLogged")
 	public boolean isUserLogged(String login, String sessionId) {
 		if (login != null && sessionId != null) {
 			boolean returnValue = false;
@@ -86,6 +89,7 @@ public class UserService {
 	}
 	
 	// ok
+	@WebMethod(operationName="isAdminLogged", action="isAdminLogged")
 	public boolean isAdminLogged(String login, String sessionId) {
 		if (login != null && sessionId != null) {
 			boolean returnValue = false;
@@ -115,6 +119,7 @@ public class UserService {
 	}
 	
 	// ok
+	@WebMethod(operationName="logIn", action="logIn")
 	public String logIn(String login, String password) {
 		// zalogowanie uzytkownika
 		// trzeba pobrac uzytkownika z bazy o podanym loginie
@@ -156,6 +161,7 @@ public class UserService {
 	}
 	
 	// ok
+	@WebMethod(operationName="logOut", action="logOut")
 	public boolean logOut(String login, String sessionId) {
 		// wylogowanie uzytkownika
 		// najpierw sprawdzic, czy taki uzytkownik jest zalogowany -
@@ -196,6 +202,7 @@ public class UserService {
 	}
 	
 	// ok
+	@WebMethod(operationName="createUser", action="createUser")
 	public boolean createUser(UserCanonical user) {
 		// dodanie nowego uzytkownika - przez rejestracje juz admina
 		// konwersja UserCanonical na User - bazodanowy - metoda z pakietu
@@ -231,6 +238,7 @@ public class UserService {
 	}
 	
 	// ok
+	@WebMethod(operationName="editUser", action="editUser")
 	public boolean editUser(String login, String sessionId, UserCanonical user) {
 		// edytowanie uzytkownika
 		// sprawdzanie, czy uzytkownik o loginie login jest zalogowany
@@ -275,7 +283,8 @@ public class UserService {
 		}
 		return false;
 	}
-
+	
+	@WebMethod(operationName="deleteUser", action="deleteUser")
 	public boolean deleteUser(String login, String sessionId,
 			String userLoginToDelete) {
 		// sprawdzenie, czy admin jest zalogowany - moznaby tylko jemu dac prawo
@@ -310,7 +319,8 @@ public class UserService {
 		}
 		return false;
 	}
-
+	
+	@WebMethod(operationName="getUser", action="getUser")
 	public UserCanonical getUser(String login, String sessionId,
 			String loginUserToGet) {
 		// sprawdzenie, czy uzytkownik jest zalogowany
@@ -350,6 +360,7 @@ public class UserService {
 	}
 	
 	// ok
+	@WebMethod(operationName="getUserList", action="getUserList")
 	public List<UserCanonical> getUserList(String login, String sessionId){
 		if (login != null && sessionId != null) {
 			Session session = null;
