@@ -22,7 +22,7 @@ import pl.rea.transform.DicsTransform;
 import pl.rea.utils.HibernateUtil;
 import pl.rea.utils.LoggedUserUtils;
 
-@WebService(serviceName = "dicsService")
+@WebService(serviceName = "dicsService", targetNamespace="dictionaries")
 @Stateless
 public class DicsService {
 	

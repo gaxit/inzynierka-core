@@ -18,7 +18,7 @@ import pl.rea.utils.HibernateUtil;
 import pl.rea.utils.LoggedUserUtils;
 import pl.rea.utils.SessionIdUtils;
 
-@WebService(serviceName = "userService")
+@WebService(serviceName = "userService", targetNamespace="users")
 @Stateless
 public class UserService {
 	private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();

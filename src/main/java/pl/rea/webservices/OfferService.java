@@ -19,7 +19,7 @@ import pl.rea.transform.OfferTransform;
 import pl.rea.utils.HibernateUtil;
 import pl.rea.utils.LoggedUserUtils;
 
-@WebService(serviceName = "offerService")
+@WebService(serviceName = "offerService", targetNamespace="offers")
 @Stateless
 public class OfferService {
 
