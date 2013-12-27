@@ -69,7 +69,7 @@ public class UserDao {
 		try {
 			Session session = sessionFactory.getCurrentSession();
 			
-			session.saveOrUpdate(user.getAddress());
+			session.save(user.getAddress());
 			session.save(user);
 		} catch (Exception e) {
 			System.out.println("UserDao saveUser exception: " + e.getMessage());
