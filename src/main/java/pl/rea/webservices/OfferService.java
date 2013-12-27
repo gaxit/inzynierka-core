@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.jws.WebMethod;
-import javax.jws.WebParam;
 import javax.jws.WebService;
 
 import org.hibernate.Session;
@@ -61,8 +60,7 @@ public class OfferService {
 
 	// ok
 	@WebMethod(operationName="getOffer", action="getOffer")
-	public OfferCanonical getOffer(
-			@WebParam(name="offerId") Long id) {
+	public OfferCanonical getOffer(Long id) {
 		// pobranie informacji o jednej ofercie
 		Session session = null;
 		Transaction tx = null;
@@ -90,11 +88,8 @@ public class OfferService {
 
 	// ok
 	@WebMethod(operationName="addOfferToUserFavourites", action="addOfferToUserFavourites")
-	public boolean addOfferToUserFavourites(
-			@WebParam(name="login") String login,
-			@WebParam(name="sessionId") String sessionId,
-			@WebParam(name="offerId") Long offerId, 
-			@WebParam(name="userLoginToAddOffer") String userLoginToAddOffer) {
+	public boolean addOfferToUserFavourites(String login, String sessionId,
+			Long offerId, String userLoginToAddOffer) {
 		// sprawdzanie, czy dany uzytkownik jest zalogowany
 		// sprawdzenie, czy zalogowany jest admin lub login i
 		// userLoginToAddOffer jest taki sam
@@ -143,10 +138,8 @@ public class OfferService {
 	
 	// ok
 	@WebMethod(operationName="getUserFavouritesOffers", action="getUserFavouritesOffers")
-	public List<OfferCanonical> getUserFavouritesOffers(
-			@WebParam(name="login") String login,
-			@WebParam(name="sessionId") String sessionId,
-			@WebParam(name="userFavouritesLogin") String userFavouritesLogin) {
+	public List<OfferCanonical> getUserFavouritesOffers(String login,
+			String sessionId, String userFavouritesLogin) {
 		// sprawdzenie, czy uzytkownik jest zalogowany
 		// sprawdzenie, czy zalogowany jest admin albo login i
 		// userFavouritesLogin sa takie same
@@ -190,11 +183,8 @@ public class OfferService {
 	
 	// ok
 	@WebMethod(operationName="deleteOfferFromUserFavourites", action="deleteOfferFromUserFavourites")
-	public boolean deleteOfferFromUserFavourites(
-			@WebParam(name="login") String login,
-			@WebParam(name="sessionId") String sessionId,
-			@WebParam(name="offerId") Long offerId, 
-			@WebParam(name="userFavouritesLogin") String userFavouritesLogin) {
+	public boolean deleteOfferFromUserFavourites(String login, String sessionId,
+			Long offerId, String userFavouritesLogin) {
 		// sprawdzenie, czy uzytkownik jest zalogowany
 		// sprawdzenie, czy zalogowany jest admin badz login i
 		// userFavouritesLogin sa takie same
@@ -243,11 +233,8 @@ public class OfferService {
 	
 	// ok
 	@WebMethod(operationName="isOfferInUserFavourites", action="isOfferInUserFavourites")
-	public boolean isOfferInUserFavourites(
-			@WebParam(name="login") String login,
-			@WebParam(name="sessionId") String sessionId,
-			@WebParam(name="offerId") Long offerId,
-			@WebParam(name="userLoginFavourites") String userLoginFavourites){
+	public boolean isOfferInUserFavourites(String login, String sessionId,
+			Long offerId, String userLoginFavourites){
 		if (login != null && sessionId != null && offerId != null
 				&& userLoginFavourites != null) {
 			Session session = null;
@@ -286,11 +273,8 @@ public class OfferService {
 	
 	// ok
 	@WebMethod(operationName="addOffer", action="addOffer")
-	public boolean addOffer(
-			@WebParam(name="login") String login,
-			@WebParam(name="sessionId") String sessionId,
-			@WebParam(name="offer") OfferCanonical offer,
-			@WebParam(name="userLoginToAddOffer") String userLoginToAddOffer) {
+	public boolean addOffer(String login, String sessionId,
+			OfferCanonical offer, String userLoginToAddOffer) {
 		if (login != null && sessionId != null && offer != null
 				&& userLoginToAddOffer != null) {
 			Session session = null;
@@ -333,11 +317,8 @@ public class OfferService {
 
 	// ok
 	@WebMethod(operationName="updateOffer", action="updateOffer")
-	public boolean updateOffer(
-			@WebParam(name="login") String login,
-			@WebParam(name="sessionId") String sessionId,
-			@WebParam(name="offer") OfferCanonical offer,
-			@WebParam(name="userLoginToAddOffer") String userLoginToAddOffer) {
+	public boolean updateOffer(String login, String sessionId,
+			OfferCanonical offer, String userLoginToAddOffer) {
 		if (login != null && sessionId != null && offer != null
 				&& userLoginToAddOffer != null) {
 			Session session = null;
@@ -371,11 +352,8 @@ public class OfferService {
 	}
 	
 	@WebMethod(operationName="deleteOffer", action="deleteOffer")
-	public boolean deleteOffer(
-			@WebParam(name="login") String login,
-			@WebParam(name="sessionId") String sessionId,
-			@WebParam(name="offerId") Long offerId,
-			@WebParam(name="userLoginToDeleteOffer") String userLoginToDeleteOffer){
+	public boolean deleteOffer(String login, String sessionId,
+			Long offerId, String userLoginToDeleteOffer){
 		if (login != null && sessionId != null && offerId != null
 				&& userLoginToDeleteOffer != null) {
 			Session session = null;
@@ -425,17 +403,9 @@ public class OfferService {
 	
 	// ok
 	@WebMethod(operationName="findOffersByCriteria", action="findOffersByCriteria")
-	public List<OfferCanonical> findOffersByCriteria(
-			@WebParam(name="minPrice") Integer minPrice,
-			@WebParam(name="maxPrice") Integer maxPrice,
-			@WebParam(name="minArea") Integer minArea,
-			@WebParam(name="maxArea") Integer maxArea,
-			@WebParam(name="minFloor") Integer minFloor,
-			@WebParam(name="maxFloor") Integer maxFloor, 
-			@WebParam(name="isGarage") Boolean isGarage,
-			@WebParam(name="town") String town,
-			@WebParam(name="estateType") String estateType,
-			@WebParam(name="transactionType") String transactionType) {
+	public List<OfferCanonical> findOffersByCriteria(Integer minPrice, Integer maxPrice,
+			Integer minArea, Integer maxArea, Integer minFloor, Integer maxFloor, 
+			Boolean isGarage, String town, String estateType, String transactionType) {
 		Session session = null;
 		Transaction tx = null;
 		List<OfferCanonical> foundOffers = null;

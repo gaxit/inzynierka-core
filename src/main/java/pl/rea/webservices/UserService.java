@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.jws.WebMethod;
-import javax.jws.WebParam;
 import javax.jws.WebService;
 
 import org.hibernate.Session;
@@ -31,9 +30,7 @@ public class UserService {
 
 	// ok
 	@WebMethod(operationName="isAnybodyLogged", action="isAnybodyLogged")
-	public boolean isAnybodyLogged(
-			@WebParam(name="login")String login, 
-			@WebParam(name="sessionId") String sessionId) {
+	public boolean isAnybodyLogged(String login, String sessionId) {
 		if (login != null && sessionId != null) {
 			boolean returnValue = false;
 			Session session = null;
@@ -63,9 +60,7 @@ public class UserService {
 	
 	// ok
 	@WebMethod(operationName="isUserLogged", action="isUserLogged")
-	public boolean isUserLogged(
-			@WebParam(name="login") String login,
-			@WebParam(name="sessionId") String sessionId) {
+	public boolean isUserLogged(String login, String sessionId) {
 		if (login != null && sessionId != null) {
 			boolean returnValue = false;
 			Session session = null;
@@ -95,9 +90,7 @@ public class UserService {
 	
 	// ok
 	@WebMethod(operationName="isAdminLogged", action="isAdminLogged")
-	public boolean isAdminLogged(
-			@WebParam(name="login") String login, 
-			@WebParam(name="sessionId") String sessionId) {
+	public boolean isAdminLogged(String login, String sessionId) {
 		if (login != null && sessionId != null) {
 			boolean returnValue = false;
 			Session session = null;
@@ -127,9 +120,7 @@ public class UserService {
 	
 	// ok
 	@WebMethod(operationName="logIn", action="logIn")
-	public String logIn(
-			@WebParam(name="login") String login,
-			@WebParam(name="password") String password) {
+	public String logIn(String login, String password) {
 		// zalogowanie uzytkownika
 		// trzeba pobrac uzytkownika z bazy o podanym loginie
 		// obliczyc dla takiego loginu sessionId
@@ -171,9 +162,7 @@ public class UserService {
 	
 	// ok
 	@WebMethod(operationName="logOut", action="logOut")
-	public boolean logOut(
-			@WebParam(name="login") String login,
-			@WebParam(name="sessionId") String sessionId) {
+	public boolean logOut(String login, String sessionId) {
 		// wylogowanie uzytkownika
 		// najpierw sprawdzic, czy taki uzytkownik jest zalogowany -
 		// LoggedUserUtils.isLogged
@@ -214,8 +203,7 @@ public class UserService {
 	
 	// ok
 	@WebMethod(operationName="createUser", action="createUser")
-	public boolean createUser(
-			@WebParam(name="user") UserCanonical user) {
+	public boolean createUser(UserCanonical user) {
 		// dodanie nowego uzytkownika - przez rejestracje juz admina
 		// konwersja UserCanonical na User - bazodanowy - metoda z pakietu
 		// transform
@@ -251,10 +239,7 @@ public class UserService {
 	
 	// ok
 	@WebMethod(operationName="editUser", action="editUser")
-	public boolean editUser(
-			@WebParam(name="login") String login,
-			@WebParam(name="sessionId") String sessionId,
-			@WebParam(name="userToEdit") UserCanonical user) {
+	public boolean editUser(String login, String sessionId, UserCanonical user) {
 		// edytowanie uzytkownika
 		// sprawdzanie, czy uzytkownik o loginie login jest zalogowany
 		// sprawdzenie, czy zalogowany jest admin albo login i user_login sa
@@ -300,10 +285,8 @@ public class UserService {
 	}
 	
 	@WebMethod(operationName="deleteUser", action="deleteUser")
-	public boolean deleteUser(
-			@WebParam(name="login") String login,
-			@WebParam(name="sessionId") String sessionId,
-			@WebParam(name="userLoginToDelete") String userLoginToDelete) {
+	public boolean deleteUser(String login, String sessionId,
+			String userLoginToDelete) {
 		// sprawdzenie, czy admin jest zalogowany - moznaby tylko jemu dac prawo
 		// do usuwania, co Ty na to?
 		// usuniecie uzytkownika o podanym loginie
@@ -338,10 +321,8 @@ public class UserService {
 	}
 	
 	@WebMethod(operationName="getUser", action="getUser")
-	public UserCanonical getUser(
-			@WebParam(name="login") String login,
-			@WebParam(name="sessionId") String sessionId,
-			@WebParam(name="userLoginToGet") String loginUserToGet) {
+	public UserCanonical getUser(String login, String sessionId,
+			String loginUserToGet) {
 		// sprawdzenie, czy uzytkownik jest zalogowany
 		// sprawdzenie, czy zalogowany jest admin albo login i loginUserToGet sa
 		// takie same
@@ -380,9 +361,7 @@ public class UserService {
 	
 	// ok
 	@WebMethod(operationName="getUserList", action="getUserList")
-	public List<UserCanonical> getUserList(
-			@WebParam(name="login") String login,
-			@WebParam(name="sessionId") String sessionId){
+	public List<UserCanonical> getUserList(String login, String sessionId){
 		if (login != null && sessionId != null) {
 			Session session = null;
 			Transaction tx = null;
