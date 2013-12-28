@@ -124,36 +124,36 @@ public class OfferDao {
 			
 			Criteria criteria = session.createCriteria(Offer.class, "offer");
 			
-			if (minPrice != null){
+			if (minPrice != null && minPrice!=0){
 				criteria.add(Expression.ge("price", minPrice));
 			}
-			if (maxPrice != null){
+			if (maxPrice != null && maxPrice!=0){
 				criteria.add(Expression.le("price", maxPrice));
 			}
-			if (minArea != null){
+			if (minArea != null && minArea!=0){
 				criteria.add(Expression.ge("area", minArea));
 			}
-			if (maxArea != null){
+			if (maxArea != null && maxArea!=0){
 				criteria.add(Expression.le("area", maxArea));
 			}
-			if (minFloor != null){
+			if (minFloor != null && minFloor!=0){
 				criteria.add(Expression.ge("floor", minFloor));
 			}
-			if (maxFloor != null){
+			if (maxFloor != null && maxFloor !=0){
 				criteria.add(Expression.le("floor", maxFloor));
 			}
 			if (isGarage != null){
 				criteria.add(Expression.eq("garage", isGarage));
 			}
-			if (town != null){
+			if (town != null && !town.equals("")){
 				criteria.createAlias("offer.address", "address");
 				criteria.add(Expression.eq("address.town", town));
 			}
-			if (estateType != null){
+			if (estateType != null && !estateType.equals("")){
 				criteria.createAlias("offer.estateType", "estateType");
 				criteria.add(Expression.eq("estateType.estateType", estateType));
 			}
-			if (transactionType != null){
+			if (transactionType != null && !transactionType.equals("")){
 				criteria.createAlias("offer.transactionType", "transType");
 				criteria.add(Expression.eq("transType.transactionType", transactionType));
 			}
