@@ -105,11 +105,11 @@ public class OfferDao {
 	}
 	
 	// ok
-	public void deleteFavouritesByOfferId(Long id){
+	public void deleteFavouritesByOfferId(Long offerId, Long userId){
 		try{
 			Session session = sessionFactory.getCurrentSession();
 			
-			session.createSQLQuery("DELETE FROM favourites WHERE offer_id=" + (long)id).executeUpdate();
+			session.createSQLQuery("DELETE FROM favourites WHERE offer_id=" + (long)offerId + " AND user_id=" + (long)userId).executeUpdate();
 		} catch (Exception e) {
 			System.out.println("OfferDao deleteFavouritesByOfferId exception: " + e.getMessage());
 		}

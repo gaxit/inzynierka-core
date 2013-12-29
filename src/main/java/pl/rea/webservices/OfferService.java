@@ -370,9 +370,9 @@ public class OfferService {
 					// usuwanie oferty podanego uzytkownika
 					// usuniecie oferty z ulubionych innych uzytkownikow
 					// usuniecie oferty z ofert
-					offerDao.deleteFavouritesByOfferId(offerId);
-					
 					User user = userDao.getUserByLogin(userLoginToDeleteOffer);
+					offerDao.deleteFavouritesByOfferId(offerId, user.getId());
+					
 					List<Offer> offerList = user.getOffers();
 					for (Offer offer : offerList) {
 						if (offer.getId().equals(offerId)){
