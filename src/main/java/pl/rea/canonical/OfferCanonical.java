@@ -7,8 +7,7 @@ import java.util.List;
 public class OfferCanonical {
 	
 	private long id;
-	private Date creationDate;
-	private Date finishDate;
+	private String offerName;
 	private String estateType;
 	private String transactionType;
 	private List<ImageCanonical> images;
@@ -30,10 +29,9 @@ public class OfferCanonical {
 		this.addressId = 0;
 		this.apartmentNo = 0;
 		this.area = 0;
-		this.creationDate = null;
+		this.offerName = null;
 		this.description = null;
 		this.estateType = null;
-		this.finishDate = null;
 		this.floor = 0;
 		this.garage = false;
 		this.houseNo = 0;
@@ -52,18 +50,6 @@ public class OfferCanonical {
 	}
 	public void setId(long id) {
 		this.id = id;
-	}
-	public Date getCreationDate() {
-		return creationDate;
-	}
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
-	public Date getFinishDate() {
-		return finishDate;
-	}
-	public void setFinishDate(Date finishDate) {
-		this.finishDate = finishDate;
 	}
 	public String getEstateType() {
 		return estateType;
@@ -154,6 +140,14 @@ public class OfferCanonical {
 	}
 	public void setApartmentNo(int apartmentNo) {
 		this.apartmentNo = apartmentNo;
+	}
+
+	public String getOfferName() {
+		return offerName;
+	}
+
+	public void setOfferName(String offerName) {
+		this.offerName = offerName;
 	}
 
 }

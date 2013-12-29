@@ -38,9 +38,8 @@ public class OfferTransform {
 		
 		offer.setArea(offerCanon.getArea());
 		offer.setId(offerCanon.getId());
-		offer.setCreationDate(offerCanon.getCreationDate());
+		offer.setOfferName(offerCanon.getOfferName());
 		offer.setDescription(offerCanon.getDescription());
-		offer.setFinishDate(offerCanon.getFinishDate());
 		offer.setFloor(offerCanon.getFloor());
 		offer.setGarage(offerCanon.getGarage());
 		offer.setPrice(offerCanon.getPrice());
@@ -72,9 +71,8 @@ public class OfferTransform {
 		
 		offerCanon.setId(offer.getId());
 		offerCanon.setArea(offer.getArea());
-		offerCanon.setCreationDate(offer.getCreationDate());
+		offerCanon.setOfferName(offer.getOfferName());
 		offerCanon.setDescription(offer.getDescription());
-		offerCanon.setFinishDate(offer.getFinishDate());
 		offerCanon.setFloor(offer.getFloor());
 		offerCanon.setGarage(offer.isGarage());
 		offerCanon.setPrice(offer.getPrice());

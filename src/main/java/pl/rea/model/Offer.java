@@ -22,10 +22,7 @@ public class Offer {
 	private Long id;
 	
 	@NotNull
-	private Date creationDate;
-	
-	@NotNull
-	private Date finishDate;
+	private String offerName;
 	
 	@OneToOne
 	@NotNull
@@ -58,10 +55,9 @@ public class Offer {
 	public Offer(){
 		this.address = null;
 		this.area = 0;
-		this.creationDate = null;
+		this.offerName = null;
 		this.description = null;
 		this.estateType = null;
-		this.finishDate = null;
 		this.floor = 0;
 		this.garage = false;
 		this.id = null;
@@ -76,22 +72,6 @@ public class Offer {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Date getCreationDate() {
-		return creationDate;
-	}
-
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
-
-	public Date getFinishDate() {
-		return finishDate;
-	}
-
-	public void setFinishDate(Date finishDate) {
-		this.finishDate = finishDate;
 	}
 
 	public Address getAddress() {
@@ -164,6 +144,14 @@ public class Offer {
 
 	public void setImages(List<Images> images) {
 		this.images = images;
+	}
+
+	public String getOfferName() {
+		return offerName;
+	}
+
+	public void setOfferName(String offerName) {
+		this.offerName = offerName;
 	}
 
 }

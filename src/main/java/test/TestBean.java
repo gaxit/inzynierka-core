@@ -103,10 +103,10 @@ public class TestBean {
 		offer.setAddressId(10002);
 		offer.setApartmentNo(5);
 		offer.setArea(50);
-		offer.setCreationDate(new Date());
+//		offer.setCreationDate(new Date());
 		offer.setDescription("Opis");
 		offer.setEstateType("Dom");
-		offer.setFinishDate(new Date());
+//		offer.setFinishDate(new Date());
 		offer.setFloor(5);
 		offer.setGarage(true);
 		offer.setHouseNo(5);

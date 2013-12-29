@@ -16,10 +16,10 @@ INSERT INTO userek (user_id, email, login, name, password, phonenumber, address_
 INSERT INTO userek (user_id, email, login, name, password, phonenumber, address_id, role_id, sessionid) VALUES (10002, 'mail2@mail.com', 'user1', 'imieUsera1', 'user1', 'nrTelefonu2', 10002, 10002, 'sessionid1');
 INSERT INTO userek (user_id, email, login, name, password, phonenumber, address_id, role_id, sessionid) VALUES (10003, 'mail2@mail.com', 'admin1', 'imie2', 'admin1', 'nrTelefonu2', 10001, 10001, 'sessionid1');
 
-INSERT INTO offer (offer_id, area, creationdate, description, finishdate, floor, garage, price, address_id, estatetype_id, transactiontype_id) VALUES (10001, 100, '1971-07-13', 'Opis1', '1971-07-13', '3', true, 200000, 10001, 10001, 10001);
-INSERT INTO offer (offer_id, area, creationdate, description, finishdate, floor, garage, price, address_id, estatetype_id, transactiontype_id) VALUES (10002, 150, '1972-07-13', 'Opis2', '1972-07-13', '2', false, 400000, 10001, 10002, 10001);
-INSERT INTO offer (offer_id, area, creationdate, description, finishdate, floor, garage, price, address_id, estatetype_id, transactiontype_id) VALUES (10003, 100, '1973-07-13', 'Opis3', '1973-07-13', '5', true, 500000, 10002, 10001, 10002);
-INSERT INTO offer (offer_id, area, creationdate, description, finishdate, floor, garage, price, address_id, estatetype_id, transactiontype_id) VALUES (10004, 100, '1974-07-13', 'Opis4', '1974-07-13', '3', true, 200000, 10002, 10001, 10002);
+INSERT INTO offer (offer_id, offername, area, description, floor, garage, price, address_id, estatetype_id, transactiontype_id) VALUES (10001, 'Oferta 1', 100, 'Opis1', '3', true, 200000, 10001, 10001, 10001);
+INSERT INTO offer (offer_id, offername, area, description, floor, garage, price, address_id, estatetype_id, transactiontype_id) VALUES (10002, 'Oferta 2', 150, 'Opis2', '2', false, 400000, 10001, 10002, 10001);
+INSERT INTO offer (offer_id, offername, area, description, floor, garage, price, address_id, estatetype_id, transactiontype_id) VALUES (10003, 'Oferta 3', 100, 'Opis3', '5', true, 500000, 10002, 10001, 10002);
+INSERT INTO offer (offer_id, offername, area, description, floor, garage, price, address_id, estatetype_id, transactiontype_id) VALUES (10004, 'Oferta 4', 100, 'Opis4', '3', true, 200000, 10002, 10001, 10002);
 
 INSERT INTO owner_offer (user_id, offer_id) VALUES (10001, 10001);
 INSERT INTO owner_offer (user_id, offer_id) VALUES (10001, 10002);
