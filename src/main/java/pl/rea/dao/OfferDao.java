@@ -97,6 +97,7 @@ public class OfferDao {
 		try{
 			Session session = sessionFactory.getCurrentSession();
 			
+			session.save(offer.getAddress());
 			session.save(offer);
 			
 		} catch (Exception e) {
