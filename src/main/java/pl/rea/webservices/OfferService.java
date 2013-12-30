@@ -429,5 +429,41 @@ public class OfferService {
 		}
 		return foundOffers;
 	}
+	
+	
+	@WebMethod(operationName="getUserOffers", action="getUserOffers")
+	public List<OfferCanonical> getUserOffers(String login, String sessionId, String userToGetOffer){
+		if (login != null && sessionId != null && userToGetOffer != null) {
+			Session session = null;
+			Transaction tx = null;
+			List<OfferCanonical> offerList = null;
+			try {
+				session = sessionFactory.openSession();
+				tx = sessionFactory.getCurrentSession().getTransaction();
+				tx.begin();
+				
+				if (loggedUserUtils.isLogged(login, sessionId)
+						&& loggedUserUtils.isAdminLoggedOrLoginsAreTheSame(
+								login, sessionId, userToGetOffer)) {
+					User user = userDao.getUserByLogin(userToGetOffer);
+					List<Offer> myOfferList = user.getOffers();
+					offerList = offerTransform.offerListToOfferCanonicalList(myOfferList);
+				}
+
+				tx.commit();
+			} catch (Exception e) {
+				System.out
+						.println("UserService getUserOffers exception: "
+								+ e.getMessage());
+				tx.rollback();
+			} finally {
+				if (session != null && session.isOpen()) {
+					session.close();
+				}
+			}
+			return offerList;
+		}
+		return null;
+	}
 
 }
