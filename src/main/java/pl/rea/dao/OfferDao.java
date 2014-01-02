@@ -97,6 +97,10 @@ public class OfferDao {
 		try{
 			Session session = sessionFactory.getCurrentSession();
 			
+			for (int i=0;i<offer.getImages().size();i++){
+				System.out.println("Name: " + offer.getImages().get(i).getFileName());
+				session.save(offer.getImages().get(i));
+			}
 			session.save(offer.getAddress());
 			session.save(offer);
 			

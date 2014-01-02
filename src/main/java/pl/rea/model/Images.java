@@ -13,6 +13,9 @@ public class Images {
 	private Long id;
 	
 	@NotNull
+	private String fileName;
+	
+	@NotNull
 	private byte[] image;
 
 	public Long getId() {
@@ -29,6 +32,14 @@ public class Images {
 
 	public void setImage(byte[] image) {
 		this.image = image;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
 }

@@ -1,11 +1,10 @@
 package pl.rea.canonical;
 
-import java.awt.Image;
-
 public class ImageCanonical {
 	
 	private long id;
-	private Image image;
+	private String fileName;
+	private byte[] image;
 	
 	public long getId() {
 		return id;
@@ -13,10 +12,16 @@ public class ImageCanonical {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public Image getImage() {
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+	public byte[] getImage() {
 		return image;
 	}
-	public void setImage(Image image) {
+	public void setImage(byte[] image) {
 		this.image = image;
 	}
 }
