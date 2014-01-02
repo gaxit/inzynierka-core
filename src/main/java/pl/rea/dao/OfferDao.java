@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -83,9 +84,10 @@ public class OfferDao {
 			Session session = sessionFactory.getCurrentSession();
 
 			Criteria criteria = session.createCriteria(User.class, "userek");
-			criteria.createAlias("userek.offers", "offers");
-			User user = ((List<User>) criteria.list()).get(0);
-			returnOwnerLogin = user.getLogin();
+//			criteria.createAlias("userek.offers", "offers");
+			String stringQuery = "SELECT u.login FROM userek u JOIN owner_offer o ON u.user_id=o.user_id WHERE o.offer_id=" + offer.getId() + ";";
+			returnOwnerLogin = ((List<String>) session.createSQLQuery(stringQuery).list()).get(0);
+//			User user = ((List<User>) criteria.list()).get(0);
 		} catch (Exception e) {
 			System.out.println("OfferDao getOfferOwnerLogin exception: " + e.getMessage());
 		}

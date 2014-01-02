@@ -12,7 +12,7 @@ INSERT INTO transactiontype (id, transactiontype) VALUES (10002, 'Sprzedaz');
 INSERT INTO address (id, apartmentno, houseno, postalcode, street, town) VALUES (10001, 5, 5,'12-345', 'Florianska', 'Krakow');
 INSERT INTO address (id, apartmentno, houseno, postalcode, street, town) VALUES (10002, 5, 5,'12-345', 'Lwowska', 'Rzeszów');
 
-INSERT INTO userek (user_id, email, login, name, password, phonenumber, address_id, role_id) VALUES (10001, 'mail1@mail.com', 'login1', 'imie1', 'haslo1', 'nrTelefonu1', 10001, 10002);
+INSERT INTO userek (user_id, email, login, name, password, phonenumber, address_id, role_id) VALUES (10001, 'mail1@mail.com', 'login1', 'imie1', 'login1', 'nrTelefonu1', 10001, 10002);
 INSERT INTO userek (user_id, email, login, name, password, phonenumber, address_id, role_id, sessionid) VALUES (10002, 'mail2@mail.com', 'user1', 'imieUsera1', 'user1', 'nrTelefonu2', 10002, 10002, 'sessionid1');
 INSERT INTO userek (user_id, email, login, name, password, phonenumber, address_id, role_id, sessionid) VALUES (10003, 'mail2@mail.com', 'admin1', 'imie2', 'admin1', 'nrTelefonu2', 10001, 10001, 'sessionid1');
 
