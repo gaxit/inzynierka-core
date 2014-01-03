@@ -50,7 +50,7 @@ public class UserTransform {
 			user = new User();
 		}
 		else{
-			user = new User();
+			user = userDao.getUserByLogin(userCanon.getLogin());
 			user.setId(userCanon.getId());
 		}
 		
