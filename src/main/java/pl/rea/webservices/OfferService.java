@@ -338,7 +338,7 @@ public class OfferService {
 				}
 				tx.commit();
 			} catch (Exception e) {
-				System.out.println("UserService updateOffer exception: "	+ e.getMessage());
+				System.out.println("OfferService updateOffer exception: "	+ e.getMessage());
 				tx.rollback();
 				returnValue = false;
 			} finally {

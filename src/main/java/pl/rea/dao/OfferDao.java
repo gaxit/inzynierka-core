@@ -52,9 +52,22 @@ public class OfferDao {
 	public void updateOffer(Offer offer) {
 		try {
 			Session session = sessionFactory.getCurrentSession();
-
+			
+			Query delete = session.createSQLQuery("DELETE FROM offer_images WHERE offer_offer_id=" + offer.getId() + ";");
+			delete.executeUpdate();
+			for (int i=0;i<offer.getImages().size();i++){
+				delete = session.createSQLQuery("DELETE FROM images WHERE filename='" + offer.getImages().get(i).getFileName() + "';");
+				delete.executeUpdate();
+			}
+			
+			for (int i=0;i<offer.getImages().size();i++){
+				if (offer.getImages().get(i).getId()==0){
+					session.save(offer.getImages().get(i));
+				}
+			}
 			session.saveOrUpdate(offer.getAddress());
 			session.saveOrUpdate(offer);
+			
 		} catch (Exception e) {
 			System.out.println("OfferDao updateOffer exception: " + e.getMessage());
 		}
