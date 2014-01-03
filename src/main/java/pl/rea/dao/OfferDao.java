@@ -53,20 +53,28 @@ public class OfferDao {
 		try {
 			Session session = sessionFactory.getCurrentSession();
 			
+			System.out.println("Update offer imageList size: " + offer.getImages().size());
+			
 			Query delete = session.createSQLQuery("DELETE FROM offer_images WHERE offer_offer_id=" + offer.getId() + ";");
 			delete.executeUpdate();
+			System.out.println("Po 1 usuwaniu");
 			for (int i=0;i<offer.getImages().size();i++){
 				delete = session.createSQLQuery("DELETE FROM images WHERE filename='" + offer.getImages().get(i).getFileName() + "';");
 				delete.executeUpdate();
+				offer.getImages().get(i).setId((long)0);
 			}
+			System.out.println("Po usuwaniu w petli");
 			
 			for (int i=0;i<offer.getImages().size();i++){
 				if (offer.getImages().get(i).getId()==0){
 					session.save(offer.getImages().get(i));
 				}
 			}
+			System.out.println("Po zapisie na nowo");
 			session.saveOrUpdate(offer.getAddress());
+			System.out.println("Po update adresu");
 			session.saveOrUpdate(offer);
+			System.out.println("Po update oferty");
 			
 		} catch (Exception e) {
 			System.out.println("OfferDao updateOffer exception: " + e.getMessage());

@@ -33,7 +33,7 @@ public class OfferTransform {
 	OfferDao offerDao = new OfferDao();
 	
 	//nie testowane
-	public Offer offerCanonicalToOffer(OfferCanonical offerCanon){
+	public Offer offerCanonicalToOffer(OfferCanonical offerCanon, List<ImageCanonical> imageCanonList){
 		Offer offer = new Offer();
 		
 		offer.setArea(offerCanon.getArea());
@@ -59,7 +59,8 @@ public class OfferTransform {
 		TransactionType transaction = transactionTypeDao.getTransactionTypeByName(offerCanon.getTransactionType());
 		offer.setTransactionType(transaction);
 		
-		List<Images> imgList = imageTransform.imageCanonicalListToImagesList(offerCanon.getImages());
+//		List<Images> imgList = imageTransform.imageCanonicalListToImagesList(offerCanon.getImages());
+		List<Images> imgList = imageTransform.imageCanonicalListToImagesList(imageCanonList);
 		offer.setImages(imgList);
 		
 		return offer;
@@ -88,8 +89,8 @@ public class OfferTransform {
 		
 		offerCanon.setTransactionType(offer.getTransactionType().getTransactionType());
 		
-		List<ImageCanonical> imgCanonList = imageTransform.imagesListToCanonicalImageList(offer.getImages());
-		offerCanon.setImages(imgCanonList);
+//		List<ImageCanonical> imgCanonList = imageTransform.imagesListToCanonicalImageList(offer.getImages());
+//		offerCanon.setImages(imgCanonList);
 		
 		offerCanon.setOwner(offerDao.getOfferOwnerLogin(offer));
 		
@@ -105,13 +106,13 @@ public class OfferTransform {
 		return offerCanonList;
 	}
 	
-	public List<Offer> offerCanonicalListToOfferList(List<OfferCanonical> offerCanonList){
-		List<Offer> offerList = new LinkedList<Offer>();
-		for (OfferCanonical offerCanon : offerCanonList) {
-			Offer offer = offerCanonicalToOffer(offerCanon);
-			offerList.add(offer);
-		}
-		return offerList;
-	}
+//	public List<Offer> offerCanonicalListToOfferList(List<OfferCanonical> offerCanonList){
+//		List<Offer> offerList = new LinkedList<Offer>();
+//		for (OfferCanonical offerCanon : offerCanonList) {
+//			Offer offer = offerCanonicalToOffer(offerCanon);
+//			offerList.add(offer);
+//		}
+//		return offerList;
+//	}
 
 }

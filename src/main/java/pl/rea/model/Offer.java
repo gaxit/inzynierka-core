@@ -38,7 +38,7 @@ public class Offer {
 	@NotNull
 	private TransactionType transactionType;
 	
-	@OneToMany(cascade=CascadeType.ALL)
+	@OneToMany//(cascade=CascadeType.ALL)
 	private List<Images> images;
 	
 	@NotNull

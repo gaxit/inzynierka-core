@@ -10,11 +10,13 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import pl.rea.canonical.ImageCanonical;
 import pl.rea.canonical.OfferCanonical;
 import pl.rea.dao.OfferDao;
 import pl.rea.dao.UserDao;
 import pl.rea.model.Offer;
 import pl.rea.model.User;
+import pl.rea.transform.ImagesTransform;
 import pl.rea.transform.OfferTransform;
 import pl.rea.utils.HibernateUtil;
 import pl.rea.utils.LoggedUserUtils;
@@ -27,6 +29,7 @@ public class OfferService {
 
 	private OfferDao offerDao = new OfferDao();
 	private OfferTransform offerTransform = new OfferTransform();
+	private ImagesTransform imageTransform = new ImagesTransform();
 	private UserDao userDao = new UserDao();
 	private LoggedUserUtils loggedUserUtils = new LoggedUserUtils();
 
@@ -274,7 +277,7 @@ public class OfferService {
 	// ok
 	@WebMethod(operationName="addOffer", action="addOffer")
 	public boolean addOffer(String login, String sessionId,
-			OfferCanonical offer, String userLoginToAddOffer) {
+			OfferCanonical offer, String userLoginToAddOffer, List<ImageCanonical> imageCanonList) {
 		if (login != null && sessionId != null && offer != null
 				&& userLoginToAddOffer != null) {
 			Session session = null;
@@ -292,7 +295,7 @@ public class OfferService {
 					User user = userDao.getUserByLogin(userLoginToAddOffer);
 					if (user != null && offer != null) {
 						Offer offerDB = offerTransform
-								.offerCanonicalToOffer(offer);
+								.offerCanonicalToOffer(offer, imageCanonList);
 						offerDao.saveOffer(offerDB);
 						user.getOffers().add(offerDB);
 						userDao.updateUser(user);
@@ -318,7 +321,7 @@ public class OfferService {
 	// ok
 	@WebMethod(operationName="updateOffer", action="updateOffer")
 	public boolean updateOffer(String login, String sessionId,
-			OfferCanonical offer, String userLoginToAddOffer) {
+			OfferCanonical offer, String userLoginToAddOffer, List<ImageCanonical> imageCanonList) {
 		if (login != null && sessionId != null && offer != null
 				&& userLoginToAddOffer != null) {
 			Session session = null;
@@ -332,7 +335,7 @@ public class OfferService {
 				if (loggedUserUtils.isLogged(login, sessionId)
 						&& loggedUserUtils.isAdminLoggedOrLoginsAreTheSame(
 								login, sessionId, userLoginToAddOffer)) {
-					Offer offerDB = offerTransform.offerCanonicalToOffer(offer);
+					Offer offerDB = offerTransform.offerCanonicalToOffer(offer, imageCanonList);
 					offerDao.updateOffer(offerDB);
 					returnValue = true;
 				}
@@ -453,7 +456,7 @@ public class OfferService {
 				tx.commit();
 			} catch (Exception e) {
 				System.out
-						.println("UserService getUserOffers exception: "
+						.println("OfferService getUserOffers exception: "
 								+ e.getMessage());
 				tx.rollback();
 			} finally {
@@ -462,6 +465,37 @@ public class OfferService {
 				}
 			}
 			return offerList;
+		}
+		return null;
+	}
+	
+	
+	@WebMethod(operationName="getOfferImages", action="getOfferImages")
+	public List<ImageCanonical> getOfferImages(Long offerIdToGetImages){
+		if (offerIdToGetImages != null) {
+			Session session = null;
+			Transaction tx = null;
+			List<ImageCanonical> imageList = null;
+			try {
+				session = sessionFactory.openSession();
+				tx = sessionFactory.getCurrentSession().getTransaction();
+				tx.begin();
+				
+				Offer offer = offerDao.getOfferById(offerIdToGetImages);
+				imageList = imageTransform.imagesListToCanonicalImageList(offer.getImages());
+				
+				tx.commit();
+			} catch (Exception e) {
+				System.out
+						.println("OfferService getOfferImages exception: "
+								+ e.getMessage());
+				tx.rollback();
+			} finally {
+				if (session != null && session.isOpen()) {
+					session.close();
+				}
+			}
+			return imageList;
 		}
 		return null;
 	}

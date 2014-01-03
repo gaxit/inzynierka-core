@@ -10,7 +10,7 @@ public class OfferCanonical {
 	private String offerName;
 	private String estateType;
 	private String transactionType;
-	private List<ImageCanonical> images;
+//	private List<ImageCanonical> images;
 	private boolean garage;
 	private int floor;
 	private int area;
@@ -36,7 +36,7 @@ public class OfferCanonical {
 		this.garage = false;
 		this.houseNo = 0;
 		this.id = 0;
-		this.images = new LinkedList<ImageCanonical>();
+//		this.images = new LinkedList<ImageCanonical>();
 		this.owner = null;
 		this.postalCode = null;
 		this.price = 0;
@@ -63,12 +63,12 @@ public class OfferCanonical {
 	public void setTransactionType(String transactionType) {
 		this.transactionType = transactionType;
 	}
-	public List<ImageCanonical> getImages() {
-		return images;
-	}
-	public void setImages(List<ImageCanonical> images) {
-		this.images = images;
-	}
+//	public List<ImageCanonical> getImages() {
+//		return images;
+//	}
+//	public void setImages(List<ImageCanonical> images) {
+//		this.images = images;
+//	}
 	public boolean getGarage() {
 		return garage;
 	}
