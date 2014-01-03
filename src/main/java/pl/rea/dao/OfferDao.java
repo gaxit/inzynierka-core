@@ -53,6 +53,7 @@ public class OfferDao {
 		try {
 			Session session = sessionFactory.getCurrentSession();
 
+			session.saveOrUpdate(offer.getAddress());
 			session.saveOrUpdate(offer);
 		} catch (Exception e) {
 			System.out.println("OfferDao updateOffer exception: " + e.getMessage());
