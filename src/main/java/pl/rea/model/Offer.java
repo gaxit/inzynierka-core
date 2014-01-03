@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Cascade;
+
 @Entity(name = "offer")
 public class Offer {
 	@Id
@@ -36,7 +38,7 @@ public class Offer {
 	@NotNull
 	private TransactionType transactionType;
 	
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL)
 	private List<Images> images;
 	
 	@NotNull
