@@ -108,8 +108,9 @@ public class OfferDao {
 				delete = session.createSQLQuery("DELETE FROM owner_offer WHERE offer_id=" + offer.getId() + ";");
 				delete.executeUpdate();
 				
-//				session.delete(offer.getAddress());
+				
 				session.delete(offer);
+				session.delete(offer.getAddress());
 			}			
 		} catch (Exception e) {
 			System.out.println("OfferDao deleteOffer exception: " + e.getMessage());
