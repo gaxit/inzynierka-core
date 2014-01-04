@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -59,6 +60,9 @@ public class UserDao {
 			Session session = sessionFactory.getCurrentSession();
 
 			session.merge(user);
+			System.out.println("Ok, update uzytkownika");
+			session.merge(user.getAddress());
+			System.out.println("Ok, update adresu uzytkownika");
 		} catch (Exception e) {
 			System.out.println("UserDao updateUser exception: " + e.getMessage());
 		}
@@ -94,15 +98,27 @@ public class UserDao {
 			
 			User user = null;
 			
+			System.out.println("User dao login?: " + login);
 			Criteria criteria = session.createCriteria(User.class);
 			criteria.add(Expression.eq("login", login));
 			List<User> userList = criteria.list();
 			if (userList.size() > 0) {
 				user = userList.get(0);
+				
+				OfferDao offerDao = new OfferDao();
+				for (int i=0;i<user.getOffers().size();i++){
+					offerDao.deleteOfferById(user.getOffers().get(i).getId());
+				}
+				String queryString = "DELETE FROM favourites WHERE user_id=" + user.getId() + ";";
+				Query query = session.createSQLQuery(queryString);
+				query.executeUpdate();
+				
+				session.delete(user);
+				session.delete(user.getAddress());
 			} else {
 				user = null;
 			}
-			session.delete(user);
+			
 		} catch (Exception e) {
 			System.out.println("UserDao deleteUserByLogin exception: " + e.getMessage());
 		}

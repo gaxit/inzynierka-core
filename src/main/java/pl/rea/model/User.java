@@ -41,7 +41,7 @@ public class User {
 	@NotNull
 	private String email;
 	
-	@OneToOne(cascade = {CascadeType.ALL})
+	@OneToOne//(cascade = {CascadeType.ALL})
 	@NotNull
 	private Address address;
 	
