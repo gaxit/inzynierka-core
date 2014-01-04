@@ -92,6 +92,23 @@ public class OfferDao {
 			Offer offer = null;
 			if (offerList.size() > 0) {
 				offer = offerList.get(0);
+				
+				
+				
+				
+				Query delete = session.createSQLQuery("DELETE FROM offer_images WHERE offer_offer_id=" + offer.getId() + ";");
+				delete.executeUpdate();
+				System.out.println("Images size?: " + offer.getImages().size());
+				for (int i=0;i<offer.getImages().size();i++){
+					delete = session.createSQLQuery("DELETE FROM images WHERE filename='" + offer.getImages().get(i).getFileName() + "';");
+					delete.executeUpdate();
+				}
+				delete = session.createSQLQuery("DELETE FROM favourites WHERE offer_id=" + offer.getId() + ";");
+				delete.executeUpdate();
+				delete = session.createSQLQuery("DELETE FROM owner_offer WHERE offer_id=" + offer.getId() + ";");
+				delete.executeUpdate();
+				
+//				session.delete(offer.getAddress());
 				session.delete(offer);
 			}			
 		} catch (Exception e) {
