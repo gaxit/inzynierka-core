@@ -10,30 +10,6 @@ import org.hibernate.Transaction;
 import java.util.Date;
 import java.util.List;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import pl.rea.canonical.OfferCanonical;
 import pl.rea.canonical.UserCanonical;
 import pl.rea.dao.EstateTypeDao;
@@ -49,7 +25,6 @@ import pl.rea.model.TransactionType;
 import pl.rea.model.User;
 import pl.rea.utils.HibernateUtil;
 import pl.rea.utils.LoggedUserUtils;
-import pl.rea.webservices.DicsService;
 import pl.rea.webservices.OfferService;
 import pl.rea.webservices.UserService;
 
@@ -73,7 +48,7 @@ public class TestBean {
 	
 //	@EJB
 //	private DicsService dicsService;
-	private DicsService dicsService = new DicsService();
+//	private DicsService dicsService = new DicsService();
 	private UserService userService = new UserService();
 	private OfferService offerService = new OfferService();
 	
