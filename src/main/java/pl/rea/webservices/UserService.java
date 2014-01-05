@@ -391,5 +391,40 @@ public class UserService {
 		}
 		return null;
 	}
+	
+	@WebMethod(operationName="userExists", action="userExists")
+	public boolean userExists(String login){
+		if (login==null){
+			return true;
+		}
+		Session session = null;
+		Transaction tx = null;
+		boolean returnValue = true;
+		try{
+			session = sessionFactory.openSession();
+			tx = sessionFactory.getCurrentSession().getTransaction();
+			tx.begin();
+			
+			User user = userDao.getUserByLogin(login);
+			if (user==null){
+				returnValue = false;
+			}
+			else{
+				returnValue = true;
+			}
+			tx.commit();
+		}
+		catch(Exception e){
+			System.out.println("UserService userExists exception: " + e.getMessage());
+			tx.rollback();
+			returnValue = true;
+		}
+		finally {
+			if (session != null && session.isOpen()) {
+	               session.close();
+	           }
+		}
+		return returnValue;
+	}
 
 }

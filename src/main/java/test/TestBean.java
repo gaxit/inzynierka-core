@@ -57,41 +57,43 @@ public class TestBean {
 	public String test() {
 		System.out.println("Test bean start");
 		
+		System.out.println("Uzytkownik istnieje? " + userService.userExists("admina"));
 		
-		UserCanonical user = new UserCanonical();
-		user.setAddressId(10001);
-		user.setApartmentNo(1);
-		user.setEmail("user1");
-		user.setSessionId("sessionid1");
-		user.setHouseNo(1);
-		user.setId((long)10002);
-		user.setLogin("user1");
-		user.setName("name");
-		user.setPassword("password");
-		user.setPhoneNumber("phone");
-		user.setPostalCode("postal");
-		user.setRole("Administrator");
-		user.setStreet("street");
-		user.setTown("town");
 		
-		OfferCanonical offer = new OfferCanonical();
-		offer.setAddressId(10002);
-		offer.setApartmentNo(5);
-		offer.setArea(50);
-//		offer.setCreationDate(new Date());
-		offer.setDescription("Opis");
-		offer.setEstateType("Dom");
-//		offer.setFinishDate(new Date());
-		offer.setFloor(5);
-		offer.setGarage(true);
-		offer.setHouseNo(5);
-		offer.setOwner("user1");
-		offer.setPostalCode("39-200");
-		offer.setPrice(200000);
-		offer.setStreet("Ulica");
-		offer.setTown("Dębica");
-		offer.setTransactionType("Wynajem");
-		offer.setId(10001);
+//		UserCanonical user = new UserCanonical();
+//		user.setAddressId(10001);
+//		user.setApartmentNo(1);
+//		user.setEmail("user1");
+//		user.setSessionId("sessionid1");
+//		user.setHouseNo(1);
+//		user.setId((long)10002);
+//		user.setLogin("user1");
+//		user.setName("name");
+//		user.setPassword("password");
+//		user.setPhoneNumber("phone");
+//		user.setPostalCode("postal");
+//		user.setRole("Administrator");
+//		user.setStreet("street");
+//		user.setTown("town");
+//		
+//		OfferCanonical offer = new OfferCanonical();
+//		offer.setAddressId(10002);
+//		offer.setApartmentNo(5);
+//		offer.setArea(50);
+////		offer.setCreationDate(new Date());
+//		offer.setDescription("Opis");
+//		offer.setEstateType("Dom");
+////		offer.setFinishDate(new Date());
+//		offer.setFloor(5);
+//		offer.setGarage(true);
+//		offer.setHouseNo(5);
+//		offer.setOwner("user1");
+//		offer.setPostalCode("39-200");
+//		offer.setPrice(200000);
+//		offer.setStreet("Ulica");
+//		offer.setTown("Dębica");
+//		offer.setTransactionType("Wynajem");
+//		offer.setId(10001);
 		
 //		System.out.println("Offer update: " + offerService.updateOffer("user1", "sessionid1", offer, "user1"));
 //		System.out.println("Offer delete from userFavourites: " + offerService.deleteOfferFromUserFavourites("admin1", "sessionid1", (long)10003, "admin1"));
@@ -109,11 +111,11 @@ public class TestBean {
 		
 		// minPrice, maxPrice, minArea, maxArea, minFloor, maxFloor, isGarage, town, estateType, transactionType
 		
-		List<OfferCanonical> foundOffers = offerService.findOffersByCriteria(null, null, null, null, null, null, null, null, null, null);
-		System.out.println("Found offer list size: " + foundOffers.size());
-		for (OfferCanonical offerCanonical : foundOffers) {
-			System.out.println("Found offer id: " + offerCanonical.getId());
-		}
+//		List<OfferCanonical> foundOffers = offerService.findOffersByCriteria(null, null, null, null, null, null, null, null, null, null);
+//		System.out.println("Found offer list size: " + foundOffers.size());
+//		for (OfferCanonical offerCanonical : foundOffers) {
+//			System.out.println("Found offer id: " + offerCanonical.getId());
+//		}
 		
 		
 		
