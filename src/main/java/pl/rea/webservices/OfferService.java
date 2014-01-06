@@ -294,19 +294,11 @@ public class OfferService {
 
 					User user = userDao.getUserByLogin(userLoginToAddOffer);
 					if (user != null && offer != null) {
-						if (imageCanonList==null){
-							System.out.println("Null list");
-						}
-						else{
-							System.out.println("not null list");
-						}
 						Offer offerDB = offerTransform
 								.offerCanonicalToOffer(offer, imageCanonList);
 						offerDao.saveOffer(offerDB);
-						System.out.println("Ofertę dodano");
 						user.getOffers().add(offerDB);
 						userDao.updateUser(user);
-						System.out.println("Użytkownika updateowano");
 						returnValue = true;
 					}
 				}
