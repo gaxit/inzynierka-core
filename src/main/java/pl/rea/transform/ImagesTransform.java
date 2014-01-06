@@ -55,6 +55,9 @@ public class ImagesTransform {
 	
 	//nie testowane
 	public List<ImageCanonical> imagesListToCanonicalImageList(List<Images> imgList){
+		if (imgList==null){
+			return new LinkedList<ImageCanonical>();
+		}
 		List<ImageCanonical> imgCanonList = new LinkedList<ImageCanonical>();
 		for (Images image : imgList) {
 			imgCanonList.add(imagesToImageCanonical(image));
@@ -64,6 +67,9 @@ public class ImagesTransform {
 	
 	//nie testowane
 	public List<Images> imageCanonicalListToImagesList(List<ImageCanonical> imgCanonList){
+		if (imgCanonList==null){
+			return new LinkedList<Images>();
+		}
 		List<Images> imgList = new LinkedList<Images>();
 		for (ImageCanonical imgCanon : imgCanonList){
 			imgList.add(imageCanonicalToImages(imgCanon));

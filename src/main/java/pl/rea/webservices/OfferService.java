@@ -50,7 +50,7 @@ public class OfferService {
 
 			tx.commit();
 		} catch (Exception e) {
-			System.out.println("offerService getAllOffers exception: "
+			System.out.println("OfferService getAllOffers exception: "
 					+ e.getMessage());
 			tx.rollback();
 		} finally {
@@ -78,7 +78,7 @@ public class OfferService {
 
 			tx.commit();
 		} catch (Exception e) {
-			System.out.println("offerService getOffer exception: "
+			System.out.println("OfferService getOffer exception: "
 					+ e.getMessage());
 			tx.rollback();
 		} finally {
@@ -125,7 +125,7 @@ public class OfferService {
 				tx.commit();
 			} catch (Exception e) {
 				System.out
-						.println("UserService addOfferToUserFavourites exception: "
+						.println("OfferService addOfferToUserFavourites exception: "
 								+ e.getMessage());
 				tx.rollback();
 				returnValue = false;
@@ -220,7 +220,7 @@ public class OfferService {
 				tx.commit();
 			} catch (Exception e) {
 				System.out
-					.println("UserService deleteOfferFromUserFavourites exception: "
+					.println("OfferService deleteOfferFromUserFavourites exception: "
 							+ e.getMessage());
 			tx.rollback();
 			returnValue = false;
@@ -261,7 +261,7 @@ public class OfferService {
 				}
 				tx.commit();
 			} catch (Exception e) {
-				System.out.println("UserService isOfferInUserFavourites exception: "	+ e.getMessage());
+				System.out.println("OfferService isOfferInUserFavourites exception: "	+ e.getMessage());
 				tx.rollback();
 				returnValue = false;
 			} finally {
@@ -294,18 +294,26 @@ public class OfferService {
 
 					User user = userDao.getUserByLogin(userLoginToAddOffer);
 					if (user != null && offer != null) {
+						if (imageCanonList==null){
+							System.out.println("Null list");
+						}
+						else{
+							System.out.println("not null list");
+						}
 						Offer offerDB = offerTransform
 								.offerCanonicalToOffer(offer, imageCanonList);
 						offerDao.saveOffer(offerDB);
+						System.out.println("Ofertę dodano");
 						user.getOffers().add(offerDB);
 						userDao.updateUser(user);
+						System.out.println("Użytkownika updateowano");
 						returnValue = true;
 					}
 				}
 				tx.commit();
 			} catch (Exception e) {
 				System.out
-						.println("UserService addOffer exception: "	+ e.getMessage());
+						.println("OfferService addOffer exception: "	+ e.getMessage());
 				tx.rollback();
 				returnValue = false;
 			} finally {
@@ -391,7 +399,7 @@ public class OfferService {
 				}
 				tx.commit();
 			} catch (Exception e) {
-				System.out.println("UserService deleteOffer exception: "	+ e.getMessage());
+				System.out.println("OfferService deleteOffer exception: "	+ e.getMessage());
 				tx.rollback();
 				returnValue = false;
 			} finally {
@@ -423,7 +431,7 @@ public class OfferService {
 			
 			tx.commit();
 		} catch (Exception e) {
-			System.out.println("UserService findOffers exception: "	+ e.getMessage());
+			System.out.println("OfferService findOffers exception: "	+ e.getMessage());
 			tx.rollback();
 		} finally {
 			if (session != null && session.isOpen()) {
