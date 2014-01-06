@@ -5,12 +5,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotNull;
 
 @Entity(name = "estatetype")
 public class EstateType {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="estateTypeSeq") 
+  	@SequenceGenerator(name="estateTypeSeq",sequenceName="estateTypeSeq", initialValue=50)
 	private Long id;
 	
 	@NotNull

@@ -4,12 +4,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotNull;
 
 @Entity(name="images")
 public class Images {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="imagesSeq") 
+  	@SequenceGenerator(name="imagesSeq",sequenceName="imagesSeq", initialValue=50)
 	private Long id;
 	
 	@NotNull

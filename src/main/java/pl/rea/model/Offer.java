@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cascade;
@@ -20,7 +21,8 @@ import org.hibernate.annotations.Cascade;
 @Entity(name = "offer")
 public class Offer {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="offerSeq") 
+  	@SequenceGenerator(name="offerSeq",sequenceName="offerSeq", initialValue=50)
 	@Column(name="offer_id")
 	private Long id;
 	

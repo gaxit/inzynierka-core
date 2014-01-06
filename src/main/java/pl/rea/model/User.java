@@ -15,12 +15,14 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotNull;
 
 @Entity(name = "userek")
 public class User {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="userekSeq") 
+  	@SequenceGenerator(name="userekSeq",sequenceName="userekSeq", initialValue=50)
 	@Column(name="user_id")
 	private Long id;
 	
