@@ -35,7 +35,8 @@ public class UserTransform {
 		userCanon.setSessionId(user.getSessionId());
 		
 		userCanon.setAddressId(user.getAddress().getId());
-		userCanon.setApartmentNo(user.getAddress().getApartmentNo());
+		if (user.getAddress().getApartmentNo() != null && user.getAddress().getApartmentNo() > 0)
+			userCanon.setApartmentNo(user.getAddress().getApartmentNo());
 		userCanon.setHouseNo(user.getAddress().getHouseNo());
 		userCanon.setPostalCode(user.getAddress().getPostalCode());
 		userCanon.setStreet(user.getAddress().getStreet());
@@ -65,7 +66,8 @@ public class UserTransform {
 		user.setRole(role);
 		
 		Address address = new Address();
-		address.setApartmentNo(userCanon.getApartmentNo());
+		if (userCanon.getApartmentNo() != null && userCanon.getApartmentNo() > 0)
+			address.setApartmentNo(userCanon.getApartmentNo());
 		address.setHouseNo(userCanon.getHouseNo());
 		address.setId(userCanon.getAddressId());
 		address.setPostalCode(userCanon.getPostalCode());

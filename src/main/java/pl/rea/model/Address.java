@@ -24,9 +24,9 @@ public class Address {
 	private String street;
 	
 	@NotNull
-	private int houseNo;
+	private Integer houseNo;
 	
-	private int apartmentNo;
+	private Integer apartmentNo;
 
 	public Long getId() {
 		return id;
@@ -60,19 +60,19 @@ public class Address {
 		this.street = street;
 	}
 
-	public int getHouseNo() {
+	public Integer getHouseNo() {
 		return houseNo;
 	}
 
-	public void setHouseNo(int houseNo) {
+	public void setHouseNo(Integer houseNo) {
 		this.houseNo = houseNo;
 	}
 
-	public int getApartmentNo() {
+	public Integer getApartmentNo() {
 		return apartmentNo;
 	}
 
-	public void setApartmentNo(int apartmentNo) {
+	public void setApartmentNo(Integer apartmentNo) {
 		this.apartmentNo = apartmentNo;
 	}
 

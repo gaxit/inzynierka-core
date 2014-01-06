@@ -16,8 +16,8 @@ public class UserCanonical {
 	private String town;
 	private String postalCode;
 	private String street;
-	private int houseNo;
-	private int apartmentNo;
+	private Integer houseNo;
+	private Integer apartmentNo;
 	
 	public Long getId() {
 		return id;
@@ -91,16 +91,16 @@ public class UserCanonical {
 	public void setStreet(String street) {
 		this.street = street;
 	}
-	public int getHouseNo() {
+	public Integer getHouseNo() {
 		return houseNo;
 	}
-	public void setHouseNo(int houseNo) {
+	public void setHouseNo(Integer houseNo) {
 		this.houseNo = houseNo;
 	}
-	public int getApartmentNo() {
+	public Integer getApartmentNo() {
 		return apartmentNo;
 	}
-	public void setApartmentNo(int apartmentNo) {
+	public void setApartmentNo(Integer apartmentNo) {
 		this.apartmentNo = apartmentNo;
 	}
 
