@@ -138,7 +138,7 @@ public class UserService {
 				tx.begin();
 				
 				User user = userDao.getUserByLogin(login);
-				if (password.equals(user.getPassword())) {
+				if (user != null && password.equals(user.getPassword())) {
 					sessionId = sessionIdUtils.getSessionId(login);
 					user.setSessionId(sessionId);
 					userDao.updateUser(user);
