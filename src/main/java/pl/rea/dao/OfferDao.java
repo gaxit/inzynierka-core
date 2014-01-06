@@ -71,7 +71,7 @@ public class OfferDao {
 				}
 			}
 			System.out.println("Po zapisie na nowo");
-			session.saveOrUpdate(offer.getAddress());
+			session.merge(offer.getAddress());
 			System.out.println("Po update adresu");
 			session.saveOrUpdate(offer);
 			System.out.println("Po update oferty");
