@@ -7,7 +7,6 @@ import javax.ejb.Stateless;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.Expression;
 
 import pl.rea.model.Role;
@@ -17,7 +16,6 @@ import pl.rea.utils.HibernateUtil;
 public class RoleDao {
 	private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 	
-	// ok
 	public List<Role> getRoleList() {
 		List<Role> roleList = null;
 		try {
@@ -30,7 +28,6 @@ public class RoleDao {
 		return roleList;
 	}
 	
-	// ok
 	public Role getRoleByName(String role) {
 		Role returnRole = null;
 		try {

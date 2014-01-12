@@ -7,18 +7,15 @@ import javax.ejb.Stateless;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.Expression;
 
 import pl.rea.model.EstateType;
-import pl.rea.model.Role;
 import pl.rea.utils.HibernateUtil;
 
 @Stateless
 public class EstateTypeDao {
 	SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 	
-	// ok
 	public List<EstateType> getEstateTypeList() {
 		List<EstateType> estateTypeList = null;
 		try {
@@ -31,7 +28,6 @@ public class EstateTypeDao {
 		return estateTypeList;
 	}
 	
-	// ok
 	public EstateType getEstateTypeByName(String estateTypeName) {
 		EstateType returnEstateType = null;
 		try {

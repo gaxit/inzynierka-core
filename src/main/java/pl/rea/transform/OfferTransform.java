@@ -3,7 +3,6 @@ package pl.rea.transform;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import pl.rea.canonical.ImageCanonical;
@@ -20,19 +19,11 @@ import pl.rea.model.TransactionType;
 @Stateless
 public class OfferTransform {
 	
-//	@EJB
 	EstateTypeDao estateTypeDao = new EstateTypeDao();
-	
-//	@EJB
 	TransactionTypeDao transactionTypeDao = new TransactionTypeDao();
-	
-//	@EJB
 	ImagesTransform imageTransform = new ImagesTransform();
-	
-//	@EJB
 	OfferDao offerDao = new OfferDao();
 	
-	//nie testowane
 	public Offer offerCanonicalToOffer(OfferCanonical offerCanon, List<ImageCanonical> imageCanonList){
 		Offer offer = new Offer();
 		
@@ -59,14 +50,12 @@ public class OfferTransform {
 		TransactionType transaction = transactionTypeDao.getTransactionTypeByName(offerCanon.getTransactionType());
 		offer.setTransactionType(transaction);
 		
-//		List<Images> imgList = imageTransform.imageCanonicalListToImagesList(offerCanon.getImages());
 		List<Images> imgList = imageTransform.imageCanonicalListToImagesList(imageCanonList);
 		offer.setImages(imgList);
 		
 		return offer;
 	}
 	
-	//nie testowane
 	public OfferCanonical offerToOfferCanonical(Offer offer){
 		OfferCanonical offerCanon = new OfferCanonical();
 		
@@ -89,9 +78,6 @@ public class OfferTransform {
 		
 		offerCanon.setTransactionType(offer.getTransactionType().getTransactionType());
 		
-//		List<ImageCanonical> imgCanonList = imageTransform.imagesListToCanonicalImageList(offer.getImages());
-//		offerCanon.setImages(imgCanonList);
-		
 		offerCanon.setOwner(offerDao.getOfferOwnerLogin(offer));
 		
 		return offerCanon;
@@ -105,14 +91,5 @@ public class OfferTransform {
 		}
 		return offerCanonList;
 	}
-	
-//	public List<Offer> offerCanonicalListToOfferList(List<OfferCanonical> offerCanonList){
-//		List<Offer> offerList = new LinkedList<Offer>();
-//		for (OfferCanonical offerCanon : offerCanonList) {
-//			Offer offer = offerCanonicalToOffer(offerCanon);
-//			offerList.add(offer);
-//		}
-//		return offerList;
-//	}
 
 }

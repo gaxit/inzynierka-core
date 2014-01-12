@@ -25,10 +25,8 @@ public class UserService {
 
 	private LoggedUserUtils loggedUserUtils = new LoggedUserUtils();
 	private UserDao userDao = new UserDao();
-	private SessionIdUtils sessionIdUtils = new SessionIdUtils();
 	private UserTransform userTransform = new UserTransform();
-
-	// ok
+	
 	@WebMethod(operationName="isAnybodyLogged", action="isAnybodyLogged")
 	public boolean isAnybodyLogged(String login, String sessionId) {
 		if (login != null && sessionId != null) {
@@ -58,7 +56,6 @@ public class UserService {
 		return false;
 	}
 	
-	// ok
 	@WebMethod(operationName="isUserLogged", action="isUserLogged")
 	public boolean isUserLogged(String login, String sessionId) {
 		if (login != null && sessionId != null) {
@@ -88,7 +85,6 @@ public class UserService {
 		return false;
 	}
 	
-	// ok
 	@WebMethod(operationName="isAdminLogged", action="isAdminLogged")
 	public boolean isAdminLogged(String login, String sessionId) {
 		if (login != null && sessionId != null) {
@@ -118,16 +114,8 @@ public class UserService {
 		return false;
 	}
 	
-	// ok
 	@WebMethod(operationName="logIn", action="logIn")
 	public String logIn(String login, String password) {
-		// zalogowanie uzytkownika
-		// trzeba pobrac uzytkownika z bazy o podanym loginie
-		// obliczyc dla takiego loginu sessionId
-		// uzupelnic pole sessionId pobranego uzytkownika
-		// wywolac metode userDao.updateUser(pobranyUser)
-		// zwrocic sessionId - return sessionId
-
 		if (login != null && password != null) {
 			Session session = null;
 			Transaction tx = null;
@@ -139,7 +127,7 @@ public class UserService {
 				
 				User user = userDao.getUserByLogin(login);
 				if (user != null && password.equals(user.getPassword())) {
-					sessionId = sessionIdUtils.getSessionId(login);
+					sessionId = SessionIdUtils.getSessionId(login);
 					user.setSessionId(sessionId);
 					userDao.updateUser(user);
 				}
@@ -160,15 +148,8 @@ public class UserService {
 		return null;
 	}
 	
-	// ok
 	@WebMethod(operationName="logOut", action="logOut")
 	public boolean logOut(String login, String sessionId) {
-		// wylogowanie uzytkownika
-		// najpierw sprawdzic, czy taki uzytkownik jest zalogowany -
-		// LoggedUserUtils.isLogged
-		// trzeba pobrac uzytkownika z bazy o podanym loginie
-		// ustawic pole sessionId pobranego uzytkownika na null
-		// wywolac metode userDao.updateUser(pobranyUser)
 		if (login != null && sessionId != null) {
 			boolean returnValue = false;;
 			Session session = null;
@@ -201,13 +182,8 @@ public class UserService {
 		return false;
 	}
 	
-	// ok
 	@WebMethod(operationName="createUser", action="createUser")
 	public boolean createUser(UserCanonical user) {
-		// dodanie nowego uzytkownika - przez rejestracje juz admina
-		// konwersja UserCanonical na User - bazodanowy - metoda z pakietu
-		// transform
-		// zapisanie uzytkownika do bazy
 		if (user != null) {
 			boolean returnValue = false;
 			Session session = null;
@@ -237,21 +213,8 @@ public class UserService {
 		return false;
 	}
 	
-	// ok
 	@WebMethod(operationName="editUser", action="editUser")
 	public boolean editUser(String login, String sessionId, UserCanonical user) {
-		// edytowanie uzytkownika
-		// sprawdzanie, czy uzytkownik o loginie login jest zalogowany
-		// sprawdzenie, czy zalogowany jest admin albo login i user_login sa
-		// takie same
-		// dlatego tak, zeby wykorzystac jedna metode dla edytowania przez
-		// admina i przez uzytkownika
-		// gdy uzytkownik bedzie edytowal swoje dane, to login i login_z_user
-		// beda takie same
-		// na poczatku sprawdzanie, czy ten uzytkownik jest zalogowany
-		// konwersja UserCanonical na User - bazodanowy - metoda z pakietu
-		// transform
-		// update uzytkownika w bazie
 		if (login != null && sessionId != null && user != null) {
 			boolean returnValue = false;
 			Session session = null;
@@ -287,9 +250,6 @@ public class UserService {
 	@WebMethod(operationName="deleteUser", action="deleteUser")
 	public boolean deleteUser(String login, String sessionId,
 			String userLoginToDelete) {
-		// sprawdzenie, czy admin jest zalogowany - moznaby tylko jemu dac prawo
-		// do usuwania, co Ty na to?
-		// usuniecie uzytkownika o podanym loginie
 		if (login != null && sessionId != null && userLoginToDelete != null) {
 			Session session = null;
 			Transaction tx = null;
@@ -323,10 +283,6 @@ public class UserService {
 	@WebMethod(operationName="getUser", action="getUser")
 	public UserCanonical getUser(String login, String sessionId,
 			String loginUserToGet) {
-		// sprawdzenie, czy uzytkownik jest zalogowany
-		// sprawdzenie, czy zalogowany jest admin albo login i loginUserToGet sa
-		// takie same
-		// pobranie i zwrocenie uzytkownika loginUserToGet
 		if (login != null && sessionId != null && loginUserToGet != null) {
 			Session session = null;
 			Transaction tx = null;
@@ -359,7 +315,6 @@ public class UserService {
 		return null;
 	}
 	
-	// ok
 	@WebMethod(operationName="getUserList", action="getUserList")
 	public List<UserCanonical> getUserList(String login, String sessionId){
 		if (login != null && sessionId != null) {

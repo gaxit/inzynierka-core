@@ -15,8 +15,7 @@ import pl.rea.utils.HibernateUtil;
 @Stateless
 public class TransactionTypeDao {
 	SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-
-	// ok
+	
 	public List<TransactionType> getTransactionTypeList() {
 		List<TransactionType> transactionTypeList = null;
 		try{
@@ -29,8 +28,7 @@ public class TransactionTypeDao {
 		}
 		return transactionTypeList;
 	}
-
-	// ok
+	
 	public TransactionType getTransactionTypeByName(String transactionTypeName) {
 		TransactionType returnTransactionType = null;
 		try {

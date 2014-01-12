@@ -1,10 +1,8 @@
 package pl.rea.model;
 
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,8 +13,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotNull;
-
-import org.hibernate.annotations.Cascade;
 
 @Entity(name = "offer")
 public class Offer {
@@ -41,7 +37,7 @@ public class Offer {
 	@NotNull
 	private TransactionType transactionType;
 	
-	@OneToMany(fetch=FetchType.EAGER)//(cascade=CascadeType.ALL)
+	@OneToMany(fetch=FetchType.EAGER)
 	private List<Images> images;
 	
 	@NotNull

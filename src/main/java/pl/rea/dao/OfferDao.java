@@ -8,11 +8,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.Expression;
-import org.hibernate.criterion.ProjectionList;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
 
 import pl.rea.model.Offer;
 import pl.rea.model.User;
@@ -22,7 +18,6 @@ import pl.rea.utils.HibernateUtil;
 public class OfferDao {
 	private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
-	// ok
 	public List<Offer> getOfferList() {
 		List<Offer> offerList = null;
 		try {
@@ -35,7 +30,6 @@ public class OfferDao {
 		return offerList;
 	}
 
-	// ok
 	public Offer getOfferById(Long id) {
 		Offer returnOffer = null;
 		try {
@@ -48,40 +42,30 @@ public class OfferDao {
 		return returnOffer;
 	}
 	
-	// ok
 	public void updateOffer(Offer offer) {
 		try {
 			Session session = sessionFactory.getCurrentSession();
 			
-			System.out.println("Update offer imageList size: " + offer.getImages().size());
-			
 			Query delete = session.createSQLQuery("DELETE FROM offer_images WHERE offer_offer_id=" + offer.getId() + ";");
 			delete.executeUpdate();
-			System.out.println("Po 1 usuwaniu");
 			for (int i=0;i<offer.getImages().size();i++){
 				delete = session.createSQLQuery("DELETE FROM images WHERE filename='" + offer.getImages().get(i).getFileName() + "';");
 				delete.executeUpdate();
 				offer.getImages().get(i).setId((long)0);
 			}
-			System.out.println("Po usuwaniu w petli");
 			
 			for (int i=0;i<offer.getImages().size();i++){
 				if (offer.getImages().get(i).getId()==0){
 					session.save(offer.getImages().get(i));
 				}
 			}
-			System.out.println("Po zapisie na nowo");
 			session.merge(offer.getAddress());
-			System.out.println("Po update adresu");
-			session.saveOrUpdate(offer);
-			System.out.println("Po update oferty");
-			
+			session.saveOrUpdate(offer);			
 		} catch (Exception e) {
 			System.out.println("OfferDao updateOffer exception: " + e.getMessage());
 		}
 	}
 	
-	// ok
 	public void deleteOfferById(Long id) {
 		try {
 			Session session = sessionFactory.getCurrentSession();
@@ -93,12 +77,8 @@ public class OfferDao {
 			if (offerList.size() > 0) {
 				offer = offerList.get(0);
 				
-				
-				
-				
 				Query delete = session.createSQLQuery("DELETE FROM offer_images WHERE offer_offer_id=" + offer.getId() + ";");
 				delete.executeUpdate();
-				System.out.println("Images size?: " + offer.getImages().size());
 				for (int i=0;i<offer.getImages().size();i++){
 					delete = session.createSQLQuery("DELETE FROM images WHERE filename='" + offer.getImages().get(i).getFileName() + "';");
 					delete.executeUpdate();
@@ -108,7 +88,6 @@ public class OfferDao {
 				delete = session.createSQLQuery("DELETE FROM owner_offer WHERE offer_id=" + offer.getId() + ";");
 				delete.executeUpdate();
 				
-				
 				session.delete(offer);
 				session.delete(offer.getAddress());
 			}			
@@ -117,24 +96,20 @@ public class OfferDao {
 		}
 	}
 	
-	// ok
 	public String getOfferOwnerLogin(Offer offer) {
 		String returnOwnerLogin = null;
 		try {
 			Session session = sessionFactory.getCurrentSession();
 
 			Criteria criteria = session.createCriteria(User.class, "userek");
-//			criteria.createAlias("userek.offers", "offers");
 			String stringQuery = "SELECT u.login FROM userek u JOIN owner_offer o ON u.user_id=o.user_id WHERE o.offer_id=" + offer.getId() + ";";
 			returnOwnerLogin = ((List<String>) session.createSQLQuery(stringQuery).list()).get(0);
-//			User user = ((List<User>) criteria.list()).get(0);
 		} catch (Exception e) {
 			System.out.println("OfferDao getOfferOwnerLogin exception: " + e.getMessage());
 		}
 		return returnOwnerLogin;
 	}
 	
-	// ok
 	public void saveOffer(Offer offer){
 		try{
 			Session session = sessionFactory.getCurrentSession();
@@ -150,7 +125,6 @@ public class OfferDao {
 		}
 	}
 	
-	// ok
 	public void deleteFavouritesByOfferId(Long offerId, Long userId){
 		try{
 			Session session = sessionFactory.getCurrentSession();

@@ -32,11 +32,9 @@ public class OfferService {
 	private ImagesTransform imageTransform = new ImagesTransform();
 	private UserDao userDao = new UserDao();
 	private LoggedUserUtils loggedUserUtils = new LoggedUserUtils();
-
-	// ok
+	
 	@WebMethod(operationName="getAllOffers", action="getAllOffers")
 	public List<OfferCanonical> getAllOffers() {
-		// pobranie wszystkich ofert dostepnych w bazie
 		Session session = null;
 		Transaction tx = null;
 		List<OfferCanonical> offerList = null;
@@ -60,11 +58,9 @@ public class OfferService {
 		}
 		return offerList;
 	}
-
-	// ok
+	
 	@WebMethod(operationName="getOffer", action="getOffer")
 	public OfferCanonical getOffer(Long id) {
-		// pobranie informacji o jednej ofercie
 		Session session = null;
 		Transaction tx = null;
 		OfferCanonical offer = null;
@@ -88,18 +84,10 @@ public class OfferService {
 		}
 		return offer;
 	}
-
-	// ok
+	
 	@WebMethod(operationName="addOfferToUserFavourites", action="addOfferToUserFavourites")
 	public boolean addOfferToUserFavourites(String login, String sessionId,
 			Long offerId, String userLoginToAddOffer) {
-		// sprawdzanie, czy dany uzytkownik jest zalogowany
-		// sprawdzenie, czy zalogowany jest admin lub login i
-		// userLoginToAddOffer jest taki sam
-		// pobranie uzytkownika userLoginToAddOffer
-		// pobranie oferty o podanym id
-		// dodanie do jego listy ulubionych pobranej oferty
-		// update uzytkownika
 		if (login != null && sessionId != null && offerId != null
 				&& userLoginToAddOffer != null) {
 			Session session = null;
@@ -139,18 +127,9 @@ public class OfferService {
 		return false;
 	}
 	
-	// ok
 	@WebMethod(operationName="getUserFavouritesOffers", action="getUserFavouritesOffers")
 	public List<OfferCanonical> getUserFavouritesOffers(String login,
 			String sessionId, String userFavouritesLogin) {
-		// sprawdzenie, czy uzytkownik jest zalogowany
-		// sprawdzenie, czy zalogowany jest admin albo login i
-		// userFavouritesLogin sa takie same
-		// pobranie uzytkownika o podanym loginie
-		// pobranie jego listy ulubionych
-		// konwersja tej listy do listy OfferCanonical - metoda z pakietu
-		// transform
-		// zwrocenie tej listy
 		if (login != null && sessionId != null && userFavouritesLogin != null) {
 			Session session = null;
 			Transaction tx = null;
@@ -184,16 +163,9 @@ public class OfferService {
 		return null;
 	}
 	
-	// ok
 	@WebMethod(operationName="deleteOfferFromUserFavourites", action="deleteOfferFromUserFavourites")
 	public boolean deleteOfferFromUserFavourites(String login, String sessionId,
 			Long offerId, String userFavouritesLogin) {
-		// sprawdzenie, czy uzytkownik jest zalogowany
-		// sprawdzenie, czy zalogowany jest admin badz login i
-		// userFavouritesLogin sa takie same
-		// pobranie uzytkownika o podanym loginie
-		// pobranie jego listy ulubionych
-		// usuniecie z jego listy ulubionych oferty o podanym id
 		if (login != null && sessionId != null && userFavouritesLogin != null) {
 			Session session = null;
 			Transaction tx = null;
@@ -234,7 +206,6 @@ public class OfferService {
 		return false;
 	}
 	
-	// ok
 	@WebMethod(operationName="isOfferInUserFavourites", action="isOfferInUserFavourites")
 	public boolean isOfferInUserFavourites(String login, String sessionId,
 			Long offerId, String userLoginFavourites){
@@ -274,7 +245,6 @@ public class OfferService {
 		return false;
 	}
 	
-	// ok
 	@WebMethod(operationName="addOffer", action="addOffer")
 	public boolean addOffer(String login, String sessionId,
 			OfferCanonical offer, String userLoginToAddOffer, List<ImageCanonical> imageCanonList) {
@@ -317,8 +287,7 @@ public class OfferService {
 		}
 		return false;
 	}
-
-	// ok
+	
 	@WebMethod(operationName="updateOffer", action="updateOffer")
 	public boolean updateOffer(String login, String sessionId,
 			OfferCanonical offer, String userLoginToAddOffer, List<ImageCanonical> imageCanonList) {
@@ -370,9 +339,6 @@ public class OfferService {
 				if (loggedUserUtils.isLogged(login, sessionId)
 						&& loggedUserUtils.isAdminLoggedOrLoginsAreTheSame(
 								login, sessionId, userLoginToDeleteOffer)) {
-					// usuwanie oferty podanego uzytkownika
-					// usuniecie oferty z ulubionych innych uzytkownikow
-					// usuniecie oferty z ofert
 					User user = userDao.getUserByLogin(userLoginToDeleteOffer);
 					offerDao.deleteFavouritesByOfferId(offerId, user.getId());
 					
@@ -404,7 +370,6 @@ public class OfferService {
 		return false;
 	}
 	
-	// ok
 	@WebMethod(operationName="findOffersByCriteria", action="findOffersByCriteria")
 	public List<OfferCanonical> findOffersByCriteria(Integer minPrice, Integer maxPrice,
 			Integer minArea, Integer maxArea, Integer minFloor, Integer maxFloor, 

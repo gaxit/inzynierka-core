@@ -3,7 +3,6 @@ package pl.rea.transform;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import pl.rea.canonical.UserCanonical;
@@ -16,10 +15,7 @@ import pl.rea.model.User;
 @Stateless
 public class UserTransform {
 	
-//	@EJB
 	UserDao userDao = new UserDao();
-	
-//	@EJB
 	RoleDao roleDao = new RoleDao();
 	
 	public UserCanonical userToUserCanonical(User user){
