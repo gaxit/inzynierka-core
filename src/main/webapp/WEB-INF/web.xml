@@ -28,5 +28,24 @@
 		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
+	
+	<filter>
+
+	<filter-name>EncodingFilter</filter-name>
+	<filter-class>
+		pl.rea.utils.EncodingFilter
+	</filter-class>
+
+	<init-param>
+		<param-name>encoding</param-name>
+		<param-value>UTF-8</param-value>
+	</init-param>
+
+</filter>
+
+<filter-mapping>
+	<filter-name>EncodingFilter</filter-name>
+	<url-pattern>/*</url-pattern>
+</filter-mapping>
 
 </web-app>
